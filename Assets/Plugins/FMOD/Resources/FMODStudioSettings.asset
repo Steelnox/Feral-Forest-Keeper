@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eef8d824ea7b63742966aaa0e94ac383, type: 3}
-  m_Name: 
+  m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
-  sourceProjectPath: D:\Uni\3r any\Projecte\Feral-Forest-Keeper\Assets\Audio\forestKeeper
+  HasSourceProject: 1
+  HasPlatforms: 1
+  sourceProjectPath: D:\JORDI_PC\Users\Jordi\Documents\GitHub\Feral-Forest-Keeper\Assets\Audio\forestKeeper
     FMOD project\forestKeeper FMOD project.fspro
   SourceProjectPathUnformatted: Assets\Audio\forestKeeper FMOD project\forestKeeper
     FMOD project.fspro
-  SourceBankPathUnformatted: Assets\Audio\forestKeeper FMOD project\Build\Desktop
+  SourceBankPathUnformatted: Assets\Audio\forestKeeper FMOD project\Build
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
