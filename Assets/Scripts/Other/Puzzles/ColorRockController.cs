@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorRockController : MonoBehaviour
 {
-    public GameObject sword;
+    public GameObject chest;
 
     public ColorRockPrincipalScript cristal1;
     public ColorRockPrincipalScript cristal2;
@@ -13,6 +13,6 @@ public class ColorRockController : MonoBehaviour
 
     void Update()
     {
-        if (cristal1.activated && cristal2.activated && cristal3.activated) sword.SetActive(true);
+        if (cristal1.activated && cristal2.activated && cristal3.activated) chest.GetComponent<Animator>().SetBool("Open", true);
     }
 }

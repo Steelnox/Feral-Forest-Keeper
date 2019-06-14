@@ -6,6 +6,8 @@ public class Chest_Behavior : MonoBehaviour
 {
     public Animator chestAnimator;
 
+    public GameObject sword;
+
     private bool open;
 
     void Start()
@@ -20,5 +22,10 @@ public class Chest_Behavior : MonoBehaviour
     public void SetOpen(bool b)
     {
         open = b;
+    }
+
+    public void swordAppear()
+    {
+        sword.SetActive(true);
     }
 }

@@ -101,7 +101,7 @@ public class CameraController : MonoBehaviour
                 transform.position = Vector3.Lerp(startPosition, endPosition, time);
                 break;
             case Behavior.TRANSITION_TO_FOLLOW:
-                Debug.Log("Distance Between Camera and Target = " + GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet, p_Camera.transform.position));
+                //Debug.Log("Distance Between Camera and Target = " + GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet, p_Camera.transform.position));
                 if (GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet, p_Camera.transform.position) < 0.1f)
                 {
                     SetActualBehavior(Behavior.FOLLOW_PLAYER);
