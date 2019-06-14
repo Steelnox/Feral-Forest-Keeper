@@ -35,8 +35,7 @@ public class Rest : State
 
         if (timer >= timeRest)
         {
-            if (melee.GetDistance(melee.player.transform.position) <= melee.distanceToChase) melee.ChangeState(melee.chase);
-            if (melee.GetDistance(melee.player.transform.position) <= melee.distanceToAttack) melee.ChangeState(melee.attack);
+              melee.ChangeState(melee.chase);
         }
     }
 

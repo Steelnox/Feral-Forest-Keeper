@@ -13,8 +13,8 @@ public class MeleeAttack : State
 
     private Vector3 directionAttack;
 
-    private Vector3 startPosition;
-    private Vector3 endPosition;
+    public Vector3 startPosition;
+    public Vector3 endPosition;
 
     public float dashLength;
 
@@ -67,9 +67,9 @@ public class MeleeAttack : State
         {
 
 
-            melee.enemy_navmesh.Move(GenericSensUtilities.instance.GetDirectionFromTo_N(startPosition, endPosition) * 0.1f);
+            melee.enemy_navmesh.Move((transform.forward * Time.deltaTime) * 2);
 
-            dashDone = true;
+            //(GenericSensUtilities.instance.GetDirectionFromTo_N(startPosition, endPosition)
         }
 
 
