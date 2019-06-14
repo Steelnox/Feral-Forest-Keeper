@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9200402762108809174}
   - component: {fileID: 9200402762111709174}
   - component: {fileID: 9200402762110709046}
+  - component: {fileID: 5241215581792876718}
   m_Layer: 0
   m_Name: aloe_vera
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5241215581792876718
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200402762108711926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.27, y: 0.29, z: 0.32}
+  m_Center: {x: 0.009291352, y: -0.008878902, z: -0.0008374602}
