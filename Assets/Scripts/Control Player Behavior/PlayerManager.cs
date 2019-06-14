@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
 
     public Item branchWeaponSlot;
     public Item leafSwordSlot;
-    public Item powerGauntaletSlot;
+    public Item powerGauntletSlot;
     public Item dashSkillSlot;
     public int actualLeafQuantity;
     public int actualKeyQuantity;
@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
 
             Player_GUI_System.instance.SetOnScreenStrenfthForestIcon(true);
 
-            powerGauntaletSlot = GameManager.instance.gantletItem;
+            powerGauntletSlot = GameManager.instance.gantletItem;
         }
         else
         {
@@ -55,7 +55,7 @@ public class PlayerManager : MonoBehaviour
             leafWeaponForAnimations.SetActive(false);
             branchWeaponSlot = null;
             leafSwordSlot = null;
-            powerGauntaletSlot = null;
+            powerGauntletSlot = null;
             dashSkillSlot = null;
         }
 

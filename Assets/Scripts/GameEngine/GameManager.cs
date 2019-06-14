@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
 
             PlayerManager.instance.branchWeaponSlot = null;
             PlayerManager.instance.leafSwordSlot = null;
-            PlayerManager.instance.powerGauntaletSlot = null;
+            PlayerManager.instance.powerGauntletSlot = null;
 
             PlayerAnimationController.instance.SetWeaponAnim(false);
         }

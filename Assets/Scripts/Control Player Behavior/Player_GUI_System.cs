@@ -25,6 +25,7 @@ public class Player_GUI_System : MonoBehaviour
     public RectTransform buttonBColor;
     public RectTransform buttonBSimon;
     public RectTransform buttonBWoodSign;
+    public RectTransform buttonBSkillRunes;
 
     public RectTransform leafWeaponIcon;
     public RectTransform branchWeaponIcon;
@@ -171,6 +172,18 @@ public class Player_GUI_System : MonoBehaviour
         else
         {
             buttonBWoodSign.anchoredPosition = hidePos;
+        }
+    }
+
+    public void SetOnScreenButtonBSkillRunes(bool b)
+    {
+        if (b)
+        {
+            buttonBSkillRunes.anchoredPosition = actionIconOnScreenPos;
+        }
+        else
+        {
+            buttonBSkillRunes.anchoredPosition = hidePos;
         }
     }
 

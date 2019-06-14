@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         ColorRockDetection();
         SimonRockDetection();
         WoodSignDetection();
+        SkillRunesDetection();
 
         if (gettingHit)
         {
@@ -359,6 +360,31 @@ public class PlayerController : MonoBehaviour
             Player_GUI_System.instance.SetOnScreenButtonBWoodSign(false);
         }
     }
+
+    private void SkillRunesDetection()
+    {
+        if (PlayerSensSystem.instance.nearestSkillRunes != null)
+        {
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSkillRunes.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.skillPillarsInteractionDistance)
+            {
+                //Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
+                Player_GUI_System.instance.SetOnScreenButtonBSkillRunes(true);
+
+                if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.F))
+                {
+                    PlayerSensSystem.instance.nearestSkillRunes.TakeSkill();
+                }
+            }
+            else
+            {
+                Player_GUI_System.instance.SetOnScreenButtonBSkillRunes(false);
+            }
+        }
+        else
+        {
+            Player_GUI_System.instance.SetOnScreenButtonBSkillRunes(false);
+        }
+    }
     public void ApplyGravity()
     {
         if (!imGrounded  && !dashing/*flyingDashFinished/*&& currentState != pushRockState*/)
@@ -436,7 +462,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (PlayerManager.instance.powerGauntaletSlot != null)
+        if (PlayerManager.instance.powerGauntletSlot != null)
         {
             if (!Input.GetButton("RB") || !Input.GetKey(KeyCode.E) && PlayerSensSystem.instance.nearestRock != null && GenericSensUtilities.instance.DistanceBetween2Vectors(characterModel.transform.position, PlayerSensSystem.instance.nearestRock.transform.position) < PlayerSensSystem.instance.nearestRock.attachDistance
             || PlayerSensSystem.instance.nearestLog != null && GenericSensUtilities.instance.DistanceBetween2Vectors(characterModel.transform.position, PlayerSensSystem.instance.nearestLog.transform.position) < PlayerSensSystem.instance.nearestLog.attachDistance)

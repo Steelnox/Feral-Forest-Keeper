@@ -7,19 +7,27 @@ public class StateMachine
     public State currentState;
     private State previousState;
 
+    public GameManager gameManager;
+
     public void ChangeState(State nextState)
     {
-        if (currentState != null) currentState.Exit();
+        if (!GameManager.instance.pause)
+        {
+            if (currentState != null) currentState.Exit();
 
-        previousState = currentState;
-        currentState = nextState;
+            previousState = currentState;
+            currentState = nextState;
 
-        currentState.Enter();
+            currentState.Enter();
+        }
     }
 
     public void ExecuteState()
     {
-        if (currentState != null) currentState.Execute();
+        if (!GameManager.instance.pause)
+        {
+            if (currentState != null) currentState.Execute();
+        }
     }
 
     public void BackToPrevious()

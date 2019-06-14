@@ -5,16 +5,9 @@ using UnityEngine;
 public class Sanctuary : MonoBehaviour
 {
     public GameObject checkpoint;
-    public List<GameObject> enemy_list;
-    public List<GameObject> rock_list;
     public PlayerController player;
     public PlayerManager playerManager;
 
-    public Item gauntlet;
-
-    public bool andreuretarded = true;
-    
-    public bool rockEvent;
     public Vector3 positionCheckpoint;
     public Material materialActivated;
 
@@ -39,24 +32,9 @@ public class Sanctuary : MonoBehaviour
         {
             renderer.material = materialActivated;
             checkpoint.transform.position = positionCheckpoint;
-            if(rockEvent)
-            {
-                foreach (GameObject rock in rock_list)
-                {
-                    rock.SetActive(true);
-                }
-
-                foreach (GameObject enemy in enemy_list)
-                {
-                    enemy.SetActive(true);
-                }
-            }
+            
 
 
-            if (playerManager.powerGauntaletSlot == null)
-            {
-                playerManager.powerGauntaletSlot = gauntlet;
-            }
             actionDone = true;
         }
     }

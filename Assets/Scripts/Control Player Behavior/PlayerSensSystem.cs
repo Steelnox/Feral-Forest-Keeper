@@ -28,6 +28,7 @@ public class PlayerSensSystem : MonoBehaviour
     public ColorRockScript nearestColorRock;
     public SimonRock nearestSimonRock;
     public WoodSign nearestWoodSign;
+    public SkillRunesScript nearestSkillRunes;
 
     public bool overGrass;
 
@@ -42,6 +43,7 @@ public class PlayerSensSystem : MonoBehaviour
     public List<ColorRockScript> colorRockList;
     public List<SimonRock> simonRockList;
     public List<WoodSign> woodSignList;
+    public List<SkillRunesScript> skillRunesList;
 
     public bool differentY;
 
@@ -67,6 +69,7 @@ public class PlayerSensSystem : MonoBehaviour
         GetNearestColorRock();
         GetNearestSimonRock();
         GetNearestWoodSign();
+        GetNearestSkillRunes();
 
         previousY = transform.position.y;
     }
@@ -158,6 +161,15 @@ public class PlayerSensSystem : MonoBehaviour
                     woodSignList.Add(woodSign);
                 }
             }
+
+            SkillRunesScript skillRunes = other.GetComponent<SkillRunesScript>();
+            if (skillRunes != null)
+            {
+                if (!FindSameSkillRunesOnList(skillRunes))
+                {
+                    skillRunesList.Add(skillRunes);
+                }
+            }
         }
     }
     public void OnTriggerStay(Collider other)
@@ -244,6 +256,15 @@ public class PlayerSensSystem : MonoBehaviour
                 if (!FindSameWoodSignOnList(woodSign))
                 {
                     woodSignList.Add(woodSign);
+                }
+            }
+
+            SkillRunesScript skillRunes = other.GetComponent<SkillRunesScript>();
+            if (skillRunes != null)
+            {
+                if (!FindSameSkillRunesOnList(skillRunes))
+                {
+                    skillRunesList.Add(skillRunes);
                 }
             }
         }
@@ -369,6 +390,19 @@ public class PlayerSensSystem : MonoBehaviour
                     if (woodSign == w)
                     {
                         woodSignList.Remove(w);
+                        return;
+                    }
+                }
+            }
+
+            SkillRunesScript skillRunes = other.GetComponent<SkillRunesScript>();
+            if (skillRunes != null)
+            {
+                foreach (SkillRunesScript s in skillRunesList)
+                {
+                    if (skillRunes == s)
+                    {
+                        skillRunesList.Remove(s);
                         return;
                     }
                 }
@@ -590,6 +624,30 @@ public class PlayerSensSystem : MonoBehaviour
         nearestWoodSign = woodSign;
     }
 
+    public void GetNearestSkillRunes()
+    {
+        SkillRunesScript skillRunes = null;
+
+        if (skillRunesList.Count > 0)
+        {
+            foreach (SkillRunesScript s in skillRunesList)
+            {
+                if (skillRunes == null)
+                {
+                    skillRunes = s;
+                }
+                else
+                {
+                    if (GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, s.transform.position) < GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, skillRunes.transform.position))
+                    {
+                        skillRunes = s;
+                    }
+                }
+            }
+        }
+        nearestSkillRunes = skillRunes;
+    }
+
     public bool CheckIfOverGrass()
     {
         foreach (BushGrass_Behavior g in grassesList)
@@ -695,6 +753,15 @@ public class PlayerSensSystem : MonoBehaviour
         foreach (WoodSign w in woodSignList)
         {
             if (w == _mWoodSign) return true;
+        }
+        return false;
+    }
+
+    private bool FindSameSkillRunesOnList(SkillRunesScript _mSkillRunes)
+    {
+        foreach (SkillRunesScript s in skillRunesList)
+        {
+            if (s == _mSkillRunes) return true;
         }
         return false;
     }

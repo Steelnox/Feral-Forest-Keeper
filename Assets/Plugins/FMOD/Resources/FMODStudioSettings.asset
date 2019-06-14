@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
-  sourceProjectPath: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
+  HasSourceProject: 1
+  HasPlatforms: 1
+  sourceProjectPath: C:\Users\OMEN\Documents\GitHub\Feral\Feral Forest Keeper\Assets\Audio\forestKeeper
     FMOD project\forestKeeper FMOD project.fspro
-  SourceProjectPathUnformatted: Assets\Audio\forestKeeper FMOD project\forestKeeper
-    FMOD project.fspro
-  SourceBankPathUnformatted: Assets\Audio\forestKeeper FMOD project\Build\Desktop
+  SourceProjectPathUnformatted: C:\Users\OMEN\Documents\GitHub\Feral\Feral Forest
+    Keeper\Assets\Audio\forestKeeper FMOD project\forestKeeper FMOD project.fspro
+  SourceBankPathUnformatted: C:\Users\OMEN\Documents\GitHub\Feral\Feral Forest Keeper\Assets\Audio\forestKeeper
+    FMOD project\Build
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
@@ -48,7 +49,7 @@ MonoBehaviour:
     Value: 0
   OverlaySettings:
   - Platform: 1
-    Value: 1
+    Value: 0
   - Platform: 2
     Value: 0
   - Platform: 20
