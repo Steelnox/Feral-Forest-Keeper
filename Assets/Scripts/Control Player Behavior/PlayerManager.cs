@@ -21,22 +21,25 @@ public class PlayerManager : MonoBehaviour
     public Item branchWeaponSlot;
     public Item leafSwordSlot;
     public Item powerGauntaletSlot;
+    public Item dashSkillSlot;
     public int actualLeafQuantity;
     public int actualKeyQuantity;
 
     public GameObject branchWeaponForAnimations;
     public GameObject leafWeaponForAnimations;
 
+    public float woodSignInteractionDistance;
+    public float simonMushroomInteractionDistance;
+    public float colorsPuzzlePilarInteractionDistance;
+    public float skillPillarsInteractionDistance;
+    public float sanctuaryInteractionDistance;
+
     void Start()
     {
         //branchWeaponSlot = GameManager.instance.branchItem;
         //CheckIfHaveBranchWeaponItem();
 
-        branchWeaponForAnimations.SetActive(false);
-        leafWeaponForAnimations.SetActive(false);
-        branchWeaponSlot = null;
-        leafSwordSlot = null;
-        powerGauntaletSlot = null;
+        
         if (PlayerController.instance.startWithAllSkills)
         {
             leafSwordSlot = GameManager.instance.swordItem;
@@ -45,6 +48,15 @@ public class PlayerManager : MonoBehaviour
             Player_GUI_System.instance.SetOnScreenStrenfthForestIcon(true);
 
             powerGauntaletSlot = GameManager.instance.gantletItem;
+        }
+        else
+        {
+            branchWeaponForAnimations.SetActive(false);
+            leafWeaponForAnimations.SetActive(false);
+            branchWeaponSlot = null;
+            leafSwordSlot = null;
+            powerGauntaletSlot = null;
+            dashSkillSlot = null;
         }
 
     }

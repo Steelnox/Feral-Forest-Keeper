@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum ItemType { BRANCH_WEAPON, LEAF_WEAPON, POWER_GANTLET, KEY, LIVE_UP};
+    public enum ItemType { BRANCH_WEAPON, LEAF_WEAPON, POWER_GANTLET, KEY, LIVE_UP, DASH_SKILL};
 
     public ItemType itemType;
     public float interactionDistance;

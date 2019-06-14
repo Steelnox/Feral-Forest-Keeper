@@ -269,7 +269,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestSanctuary != null) 
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSanctuary.transform.position, PlayerController.instance.transform.position) < 2)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSanctuary.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.sanctuaryInteractionDistance)
             {
                 Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.F))
@@ -292,7 +292,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestColorRock != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestColorRock.transform.position, PlayerController.instance.transform.position) < 2)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestColorRock.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.colorsPuzzlePilarInteractionDistance)
             {
                 Player_GUI_System.instance.SetOnScreenButtonBColor(true);
 
@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestSimonRock != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSimonRock.transform.position, PlayerController.instance.transform.position) < 2)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSimonRock.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.simonMushroomInteractionDistance)
             {
                 //Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 Player_GUI_System.instance.SetOnScreenButtonBSimon(true);
@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestWoodSign != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestWoodSign.transform.position, PlayerController.instance.transform.position) < 2)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestWoodSign.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.woodSignInteractionDistance)
             {
                 //Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 Player_GUI_System.instance.SetOnScreenButtonBWoodSign(true);
@@ -428,10 +428,14 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.Space) && !attacking && imGrounded && !gettingHit)
+        if (PlayerManager.instance.dashSkillSlot != null)
         {
-            if (!inSlowMovement && dashCooldown == dashCooldownTime) ChangeState(dashState);
+            if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.Space) && !attacking && imGrounded && !gettingHit)
+            {
+                if (!inSlowMovement && dashCooldown == dashCooldownTime) ChangeState(dashState);
+            }
         }
+        
         if (PlayerManager.instance.powerGauntaletSlot != null)
         {
             if (!Input.GetButton("RB") || !Input.GetKey(KeyCode.E) && PlayerSensSystem.instance.nearestRock != null && GenericSensUtilities.instance.DistanceBetween2Vectors(characterModel.transform.position, PlayerSensSystem.instance.nearestRock.transform.position) < PlayerSensSystem.instance.nearestRock.attachDistance
