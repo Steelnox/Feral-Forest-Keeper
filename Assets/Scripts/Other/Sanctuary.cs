@@ -11,6 +11,8 @@ public class Sanctuary : MonoBehaviour
     public PlayerManager playerManager;
 
     public Item gauntlet;
+
+    public bool andreuretarded = true;
     
     public bool rockEvent;
     public Vector3 positionCheckpoint;
