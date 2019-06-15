@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public PushLog_State pushLogState;
     public Dash_PlayerState dashState;
     public ShowWeapon_PlayerState showingWeaponState;
+    public Death_PlayerState deathState;
     public GameObject meleeWeaponRoot;
     public BoxCollider weaponCollider;
 
@@ -112,7 +113,26 @@ public class PlayerController : MonoBehaviour
         flyingDashFinished = false;
         checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
     }
-
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    playerAlive = true;
+    //    attackPivot.transform.localRotation = Quaternion.Euler(0, -60, 0);
+    //    SetCanMove(true);
+    //    ChangeState(movementState);
+    //    actualSpeedMultipler = movementSpeed;
+    //    dashing = false;
+    //    dashCooldown = dashCooldownTime;
+    //    actualPlayerLive = playerLive;
+    //    initFallingPosition = GameManager.instance.levelCheckPoint.transform.position;
+    //    pushing = false;
+    //    actualHitCooldown = hitCooldownTime;
+    //    attackTrail.enabled = false;
+    //    deathByFall = false;
+    //    fallingToDeath = false;
+    //    showingWeapon = false;
+    //    flyingDashFinished = false;
+    //    checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
+    //}
     void Update()
     {
         CheckInputsConditions();
@@ -141,7 +161,7 @@ public class PlayerController : MonoBehaviour
         /////INPUTS CHECK////
         //XboxGamePadKeyTest();
 
-        imGrounded = p_controller.isGrounded; //Now each State setup imGrounded.
+        //imGrounded = p_controller.isGrounded; //Now each State setup imGrounded.
         if (imGrounded) initFallingPosition = this.transform.position;
         /////////END OF MOVEMENT LOGIC////////
 
@@ -389,7 +409,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ApplyGravity()
     {
-        if (!imGrounded  && !dashing/*flyingDashFinished/*&& currentState != pushRockState*/)
+        if (!imGrounded && !dashing/*flyingDashFinished/*&& currentState != pushRockState*/)
         {
             gravity += Mathf.Exp(gravityForce);
 

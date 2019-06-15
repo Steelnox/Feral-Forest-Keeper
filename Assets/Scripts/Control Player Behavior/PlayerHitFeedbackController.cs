@@ -49,6 +49,20 @@ public class PlayerHitFeedbackController : MonoBehaviour
         }
         curveValue = 0;
     }
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    fallHit = false;
+    //    if (globalVolume != null)
+    //    {
+    //        globalVolume.profile.TryGetSettings(out vignette);
+    //        globalVolume.profile.TryGetSettings(out colorGrading);
+    //    }
+    //    if (colorGrading != null)
+    //    {
+    //        initialPostExposureValue = colorGrading.postExposure.value;
+    //    }
+    //    curveValue = 0;
+    //}
     void Update()
     {
         if (vignette != null)

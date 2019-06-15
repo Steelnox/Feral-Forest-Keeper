@@ -56,7 +56,17 @@ public class GameManager : MonoBehaviour
         branchItem_InitLocation = branchItem.transform.position;
         swordItem_InitLocation = swordItem.transform.position;
     }
-
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    actualRespawnCoolDown = respawnCoolDown;
+    //    provisionalGUIMenuOnScreenPos = provisionalGUIMenu.anchoredPosition;
+    //    hidePos = Vector2.down * 1000;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    PlayerController.instance.transform.position = levelCheckPoint.transform.position;
+    //    startCheckPointPosition = levelCheckPoint.transform.position;
+    //    branchItem_InitLocation = branchItem.transform.position;
+    //    swordItem_InitLocation = swordItem.transform.position;
+    //}
     void Update()
     {
         if (Input.GetButtonDown("Start") || Input.GetKeyDown(KeyCode.Escape))
@@ -96,6 +106,7 @@ public class GameManager : MonoBehaviour
                 PlayerHitFeedbackController.instance.FallHit();
                 //PlayerController.instance.SetCanMove(false);
                 PlayerController.instance.noInput = true;
+                PlayerController.instance.ChangeState(PlayerController.instance.deathState);
                 CameraController.instance.SetActualBehavior(CameraController.Behavior.PLAYER_DEATH);
             }
 
@@ -116,6 +127,7 @@ public class GameManager : MonoBehaviour
                     PlayerController.instance.deathByFall = false;
                     //PlayerController.instance.SetCanMove(true);
                     PlayerController.instance.noInput = false;
+                    PlayerController.instance.ChangeState(PlayerController.instance.movementState);
                     deathByFall = false;
                     if (PlayerController.instance.actualPlayerLive <= 0)
                     {

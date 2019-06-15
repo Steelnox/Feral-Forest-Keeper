@@ -54,7 +54,10 @@ public class PlayerSensSystem : MonoBehaviour
     {
         colliderSens.radius = sensRange;
     }
-
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    colliderSens.radius = sensRange;
+    //}
     void Update()
     {
         actualY = transform.position.y;

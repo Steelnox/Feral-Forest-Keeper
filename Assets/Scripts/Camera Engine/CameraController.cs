@@ -56,8 +56,18 @@ public class CameraController : MonoBehaviour
         //deathCount = 0;
         blendTime = 0;
 	}
-	
-	void Update ()
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    desiredPosition = target.transform.position + cameraOffSet;
+    //    transform.position = desiredPosition;
+    //    SetActualBehavior(Behavior.FOLLOW_PLAYER);
+    //    initCameraRotation = p_Camera.transform.rotation;
+    //    p_Camera.fieldOfView = standardFOV;
+    //    //actualScriptedCooldown = scriptedCooldownTime;
+    //    //deathCount = 0;
+    //    blendTime = 0;
+    //}
+    void Update ()
     {
         switch (actualBehavior)
         {

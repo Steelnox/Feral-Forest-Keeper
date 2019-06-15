@@ -61,7 +61,28 @@ public class PlayerManager : MonoBehaviour
         }
 
     }
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    if (PlayerController.instance.startWithAllSkills)
+    //    {
+    //        leafSwordSlot = GameManager.instance.swordItem;
+    //        CheckIfHaveLeafWeaponItem();
 
+    //        Player_GUI_System.instance.SetOnScreenStrenfthForestIcon(true);
+
+    //        powerGauntletSlot = GameManager.instance.gantletItem;
+    //        dashSkillSlot = GameManager.instance.dashItem;
+    //    }
+    //    else
+    //    {
+    //        branchWeaponForAnimations.SetActive(false);
+    //        leafWeaponForAnimations.SetActive(false);
+    //        branchWeaponSlot = null;
+    //        leafSwordSlot = null;
+    //        powerGauntletSlot = null;
+    //        dashSkillSlot = null;
+    //    }
+    //}
     void Update()
     {
         /*if (leafSwordSlot == null) PlayerAnimationController.instance.SetLeafWeaponAnim(false);
