@@ -87,12 +87,12 @@ public class CameraController : MonoBehaviour
                 actualScriptedCooldown -= Time.deltaTime;
                 if (actualScriptedCooldown <= 0)
                 {
-                    PlayerController.instance.SetCanMove(true);
+                    PlayerController.instance.noInput = true;
                     actualScriptedCooldown = scriptedCooldownTime;
                     SetActualBehavior(Behavior.FOLLOW_PLAYER);
                     break;
                 }
-                PlayerController.instance.SetCanMove(false);
+                PlayerController.instance.noInput = false;
                 PlayerController.instance.ChangeState(PlayerController.instance.movementState);
                 FollowTarget(scriptedTarget);
                 break;

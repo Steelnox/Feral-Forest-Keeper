@@ -618,7 +618,7 @@ public class PlayerController : MonoBehaviour
         //    actualPlayerLive = 0;
         //}
         StaticCameraZone scz = other.gameObject.GetComponent<StaticCameraZone>();
-        if (scz != null)
+        if (scz != null && CameraController.instance.GetActualBehavior() != CameraController.Behavior.SCRIPT_MOVEMENT)
         {
             if (CameraController.instance.GetActualBehavior() != CameraController.Behavior.STATIC_CAMERA_ZONE)
             {
@@ -629,7 +629,7 @@ public class PlayerController : MonoBehaviour
     public void OnTriggerExit(Collider other)
     {
         StaticCameraZone scz = other.gameObject.GetComponent<StaticCameraZone>();
-        if (scz != null)
+        if (scz != null && CameraController.instance.GetActualBehavior() != CameraController.Behavior.SCRIPT_MOVEMENT)
         {
             if (CameraController.instance.GetActualBehavior() != CameraController.Behavior.TRANSITION_TO_FOLLOW) CameraController.instance.SetActualBehavior(CameraController.Behavior.TRANSITION_TO_FOLLOW);
         }
@@ -659,7 +659,7 @@ public class PlayerController : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
-        if (!gettingHit)
+        if (!gettingHit && currentState != deathState)
         {
             if (actualPlayerLive > 0)
             {

@@ -229,5 +229,6 @@ public class GameManager : MonoBehaviour
     public void PlayerDead()
     {
         playerDead = true;
+        if (PlayerController.instance.currentState != PlayerController.instance.deathState) PlayerController.instance.ChangeState(PlayerController.instance.deathState);
     }
 }

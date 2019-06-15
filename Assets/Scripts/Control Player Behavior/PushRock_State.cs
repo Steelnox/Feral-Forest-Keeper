@@ -30,7 +30,7 @@ public class PushRock_State : State
         
         //Debug.Log("First Contact Distance = " + constactDistance);
         //Debug.Log("Actual Contact Distance = " + GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.transform.position, PlayerSensSystem.instance.nearestRock.FindContactPoint(PlayerController.instance.transform.position)));
-        if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.4f || PlayerSensSystem.instance.nearestRock.CheckIfFalling() || actualContactDistance < constactDistance - 0.1f || actualContactDistance > constactDistance + 0.1f || lastMovableRock != PlayerSensSystem.instance.nearestRock)
+        if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.5f || PlayerSensSystem.instance.nearestRock.CheckIfFalling() || actualContactDistance < constactDistance - 0.1f || actualContactDistance > constactDistance + 0.1f || lastMovableRock != PlayerSensSystem.instance.nearestRock)
         {
             //Debug.Log("GroundDistance = " + PlayerSensSystem.instance.CheckGroundDistance());
             //Debug.Log("Exit PushRock State");
