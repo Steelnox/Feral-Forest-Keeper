@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Item branchItem;
     public Item swordItem;
     public Item gantletItem;
+    public Item dashItem;
     public bool pause;
     public RectTransform provisionalGUIMenu;
     public Item[] liveUpPool;
@@ -37,6 +39,11 @@ public class GameManager : MonoBehaviour
     private Vector3 startCheckPointPosition;
     private Vector3 branchItem_InitLocation;
     private Vector3 swordItem_InitLocation;
+
+    [SerializeField]
+    private bool deathByFall;
+    [SerializeField]
+    private bool playerDead;
 
     void Start()
     {
@@ -65,7 +72,7 @@ public class GameManager : MonoBehaviour
         }
         if (pause)
         {
-            //Debug.Log("Entering Pause");
+            Debug.Log("Entering Pause");
             PlayerController.instance.noInput = true;
             if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
             if (Input.GetButtonDown("Back") || Input.GetKeyDown(KeyCode.Q))
@@ -81,13 +88,14 @@ public class GameManager : MonoBehaviour
         }
         /////// PLAYER DEATH CONTROLER ////////
         ///By FALLING
-        if (PlayerController.instance.actualPlayerLive > 0 && PlayerController.instance.deathByFall)
+        if (deathByFall)
         {
-            
             if (actualRespawnCoolDown == respawnCoolDown)
             {
+                Debug.Log("Actual respawn == resapwn Cooldown");
                 PlayerHitFeedbackController.instance.FallHit();
-                PlayerController.instance.SetCanMove(false);
+                //PlayerController.instance.SetCanMove(false);
+                PlayerController.instance.noInput = true;
                 CameraController.instance.SetActualBehavior(CameraController.Behavior.PLAYER_DEATH);
             }
 
@@ -95,14 +103,24 @@ public class GameManager : MonoBehaviour
 
             if (actualRespawnCoolDown <= 0)
             {
-                PlayerController.instance.transform.position = levelCheckPoint.transform.position;
-                if (PlayerController.instance.transform.position == levelCheckPoint.transform.position)
+                if (PlayerController.instance.transform.position != levelCheckPoint.transform.position)
                 {
-                    //Debug.Log("After death, player on CheckPointPosition");
+                    PlayerController.instance.transform.position = levelCheckPoint.transform.position;
+                }
+                else
+                //if (PlayerController.instance.transform.position == levelCheckPoint.transform.position)
+                {
+                    Debug.Log("After death, player on CheckPointPosition: " + levelCheckPoint.transform.position);
                     actualRespawnCoolDown = respawnCoolDown;
                     PlayerController.instance.actualPlayerLive--;
                     PlayerController.instance.deathByFall = false;
-                    PlayerController.instance.SetCanMove(true);
+                    //PlayerController.instance.SetCanMove(true);
+                    PlayerController.instance.noInput = false;
+                    deathByFall = false;
+                    if (PlayerController.instance.actualPlayerLive <= 0)
+                    {
+                        playerDead = true;
+                    }
                 }
             }
 
@@ -110,13 +128,12 @@ public class GameManager : MonoBehaviour
             {
                 CameraController.instance.SetActualBehavior(CameraController.Behavior.FOLLOW_PLAYER);
             }
-            
         }
-        else
+
         ///By DIYNG
-        if (PlayerController.instance.actualPlayerLive <= 0)
+        if (playerDead)
         {
-            //Debug.Log("Entering Death by Dying");
+            Debug.Log("Entering Death by Dying");
             PlayerController.instance.noInput = true;
             if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
             if (Input.GetButtonDown("Back") || Input.GetKeyDown(KeyCode.Q))
@@ -125,7 +142,8 @@ public class GameManager : MonoBehaviour
             }
             if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.E))
             {
-                ResetGame();
+                SceneManager.LoadScene("Lvl1 Def");
+                //ResetGame();
             }
         }
     }
@@ -171,7 +189,7 @@ public class GameManager : MonoBehaviour
 
         if (!PlayerController.instance.startWithAllSkills)
         {
-            PlayerAnimationController.instance.SetWeaponAnim(true);
+            //PlayerAnimationController.instance.SetWeaponAnim(true);
 
             PlayerManager.instance.branchWeaponForAnimations.SetActive(false);
             PlayerManager.instance.leafWeaponForAnimations.SetActive(false);
@@ -190,5 +208,14 @@ public class GameManager : MonoBehaviour
 
         if (branchItem.collected) branchItem.SetItem(branchItem_InitLocation, Vector3.up * 45);
         if (swordItem.collected) swordItem.SetItem(swordItem_InitLocation, Vector3.up * 45);
+        playerDead = false;
+    }
+    public void DeathByFall()
+    {
+        deathByFall = true;
+    }
+    public void PlayerDead()
+    {
+        playerDead = true;
     }
 }

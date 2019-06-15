@@ -61,12 +61,13 @@ public class MovableRocks : MonoBehaviour
     {
         Vector2 localDirection = new Vector2(0,0);
         attchAviable = false;
-        float angleBetweenPlayerForwardAndContactPointForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerAnimationController.instance.transform.position, FindContactPoint(PlayerAnimationController.instance.transform.position))));
+        //float angleBetweenPlayerForwardAndContactPointForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.transform.position, FindContactPoint(PlayerController.instance.transform.position))));
 
         if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.characterModel.transform.position, transform.position) < attachDistance)
         {
+            float angleBetweenPlayerForwardAndContactPointForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.transform.position, FindContactPoint(PlayerController.instance.transform.position))));
             //Debug.Log("PLAYER ON FORWARD: " + angleBetweenPlayerForwardAndContactPointForward);
-            localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerAnimationController.instance.transform.position, FindContactPoint(PlayerAnimationController.instance.transform.position)));
+            localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.transform.position, FindContactPoint(PlayerController.instance.transform.position)));
             if (angleBetweenPlayerForwardAndContactPointForward < angleToContact && angleBetweenPlayerForwardAndContactPointForward > 0)
                 attchAviable = true;
         }

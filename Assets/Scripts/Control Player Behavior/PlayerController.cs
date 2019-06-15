@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown;
     [SerializeField]
     private float dashChargesRemind;
+    [SerializeField]
     private Vector3 initFallingPosition;
     public Vector3 pushDirection;
     private float actualHitCooldown;
@@ -101,11 +102,12 @@ public class PlayerController : MonoBehaviour
         dashing = false;
         dashCooldown = dashCooldownTime;
         actualPlayerLive = playerLive;
-        initFallingPosition = this.transform.position;
+        initFallingPosition = GameManager.instance.levelCheckPoint.transform.position;
         pushing = false;
         actualHitCooldown = hitCooldownTime;
         attackTrail.enabled = false;
         deathByFall = false;
+        fallingToDeath = false;
         showingWeapon = false;
         flyingDashFinished = false;
         checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
@@ -392,15 +394,16 @@ public class PlayerController : MonoBehaviour
             gravity += Mathf.Exp(gravityForce);
 
             movement.y = movement.y - (gravity * Time.deltaTime);
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(initFallingPosition, transform.position) > 0.5f)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(initFallingPosition, this.transform.position) > 0.5f)
             {
-                if (PlayerSensSystem.instance.CheckGroundDistance() >= deathHeight)
+                if (GenericSensUtilities.instance.DistanceBetween2Vectors(initFallingPosition, transform.position) >= deathHeight)
                 {
                     fallingToDeath = true;
                     deathByFall = true;
+                    GameManager.instance.DeathByFall();
                 }
                 else
-                if (PlayerSensSystem.instance.CheckGroundDistance() > checkDistanceOffset + 0.5f)
+                if (PlayerSensSystem.instance.CheckGroundDistance() > checkDistanceOffset + 0.2f)
                 {
                     falling = true;
                 }
@@ -558,7 +561,7 @@ public class PlayerController : MonoBehaviour
             Z_Input = 0;
         }
 
-        if (canMove && !gettingHit && !attacking && imGrounded)
+        if (/*canMove && */!gettingHit && !attacking && imGrounded)
         {
             direction.x = X_Input;
             direction.y = Z_Input;
@@ -642,6 +645,10 @@ public class PlayerController : MonoBehaviour
             {
                 actualPlayerLive -= damage;
                 gettingHit = true;
+            }
+            else
+            {
+                GameManager.instance.PlayerDead();
             }
         }
     }

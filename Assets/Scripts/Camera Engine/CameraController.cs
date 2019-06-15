@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour
         SetActualBehavior(Behavior.FOLLOW_PLAYER);
         initCameraRotation = p_Camera.transform.rotation;
         p_Camera.fieldOfView = standardFOV;
-        actualScriptedCooldown = scriptedCooldownTime;
+        //actualScriptedCooldown = scriptedCooldownTime;
         //deathCount = 0;
         blendTime = 0;
 	}
@@ -144,8 +144,9 @@ public class CameraController : MonoBehaviour
         p_Camera.transform.position = cameraMovement;
     }
     
-    public void StartScriptedMovement(GameObject tempTarget)
+    public void StartScriptedMovement(GameObject tempTarget, float scriptedTime)
     {
+        actualScriptedCooldown = scriptedTime;
         scriptedTarget = tempTarget;
         SetActualBehavior(Behavior.SCRIPT_MOVEMENT);
     }

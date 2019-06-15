@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
             Player_GUI_System.instance.SetOnScreenStrenfthForestIcon(true);
 
             powerGauntletSlot = GameManager.instance.gantletItem;
+            dashSkillSlot = GameManager.instance.dashItem;
         }
         else
         {

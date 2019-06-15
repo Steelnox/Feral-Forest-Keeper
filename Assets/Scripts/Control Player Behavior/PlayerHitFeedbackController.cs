@@ -82,16 +82,24 @@ public class PlayerHitFeedbackController : MonoBehaviour
                 colorGrading.postExposure.value = fadeInFallDeathCurveTime.Evaluate(time);
             }
         }
+        //else
+        //{
+        //    if (vignetteFactor > 0.1f)
+        //    {
+        //        vignetteFactor -= Time.deltaTime / feedbackLength;
+        //    }
+        //    else
+        //    {
+        //        if (vignetteFactor != 0) vignetteFactor = 0;
+        //    }
+        //}
+        if (vignetteFactor > 0.1f)
+        {
+            vignetteFactor -= Time.deltaTime / feedbackLength;
+        }
         else
         {
-            if (vignetteFactor > 0.1f)
-            {
-                vignetteFactor -= Time.deltaTime / feedbackLength;
-            }
-            else
-            {
-                if (vignetteFactor != 0) vignetteFactor = 0;
-            }
+            if (vignetteFactor != 0) vignetteFactor = 0;
         }
     }
     public void Hit()
@@ -100,6 +108,7 @@ public class PlayerHitFeedbackController : MonoBehaviour
     }
     public void FallHit()
     {
+        Hit();
         fallHit = true;
         fadeInFallDeathCurveTime.postWrapMode = WrapMode.ClampForever;
     }

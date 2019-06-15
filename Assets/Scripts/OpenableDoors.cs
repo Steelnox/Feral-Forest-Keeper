@@ -13,6 +13,7 @@ public class OpenableDoors : MonoBehaviour
     public float scripteMovementsRepetitions;
     public float smoothmovement;
     public bool cameraFeedback;
+    public float feedbackCooldownTime;
     public bool startOpened;
     public bool holdSwitchToOpen;
     public bool lockState;
@@ -202,7 +203,7 @@ public class OpenableDoors : MonoBehaviour
             {
                 if (cameraFeedback && actualSetupTimeLaps == 0 && justUnlocked)
                 {
-                    CameraController.instance.StartScriptedMovement(this.gameObject);
+                    CameraController.instance.StartScriptedMovement(this.gameObject, feedbackCooldownTime);
                 }
                 
                 switch (displacementType)
@@ -256,7 +257,7 @@ public class OpenableDoors : MonoBehaviour
                         justClose = true;
                         justOpen = false;
                         scripteMovementsRepetitions--;
-                        CameraController.instance.StartScriptedMovement(this.gameObject);
+                        CameraController.instance.StartScriptedMovement(this.gameObject, feedbackCooldownTime);
                     }
                     //Debug.Log("SwitchedActivated");
                     
@@ -308,7 +309,7 @@ public class OpenableDoors : MonoBehaviour
                         justOpen = true;
                         justClose = false;
                         scripteMovementsRepetitions--;
-                        CameraController.instance.StartScriptedMovement(this.gameObject);
+                        CameraController.instance.StartScriptedMovement(this.gameObject, feedbackCooldownTime);
                     }
                     switch (displacementType)
                     {
@@ -346,7 +347,7 @@ public class OpenableDoors : MonoBehaviour
                         justClose = true;
                         justOpen = false;
                         scripteMovementsRepetitions--;
-                        CameraController.instance.StartScriptedMovement(this.gameObject);
+                        CameraController.instance.StartScriptedMovement(this.gameObject, feedbackCooldownTime);
                     }
                     //Debug.Log("SwitchedActivated");
                     switch (displacementType)
@@ -397,7 +398,7 @@ public class OpenableDoors : MonoBehaviour
                         justOpen = true;
                         justClose = false;
                         scripteMovementsRepetitions--;
-                        CameraController.instance.StartScriptedMovement(this.gameObject);
+                        CameraController.instance.StartScriptedMovement(this.gameObject, feedbackCooldownTime);
                     }
                     switch (displacementType)
                     {

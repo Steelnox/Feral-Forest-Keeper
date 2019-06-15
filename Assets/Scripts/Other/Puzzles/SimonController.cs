@@ -35,6 +35,8 @@ public class SimonController : MonoBehaviour
     public Material originalMaterial;
     public Material colorMaterial;
 
+    public float feedbackCooldownTime;
+
     #region Singleton
 
     public static SimonController instance;
@@ -99,6 +101,7 @@ public class SimonController : MonoBehaviour
 
             if (switch_Act.holdedSwitched)
             {
+                if (!puzzleActivated) CameraController.instance.StartScriptedMovement(colorRocks[0].gameObject, feedbackCooldownTime);
                 puzzleActivated = true;
                 resetDone = false;
             }
@@ -142,6 +145,7 @@ public class SimonController : MonoBehaviour
             {
                 key.SetActive(true);
                 spawnkey = true;
+                CameraController.instance.StartScriptedMovement(key.gameObject, feedbackCooldownTime);
             }
             
         }
