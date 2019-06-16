@@ -37,6 +37,9 @@ public class SimonController : MonoBehaviour
 
     public float feedbackCooldownTime;
 
+    [FMODUnity.EventRef]
+    public string successPuzzleEvent;
+
     #region Singleton
 
     public static SimonController instance;
@@ -144,6 +147,8 @@ public class SimonController : MonoBehaviour
             if (!spawnkey)
             {
                 key.SetActive(true);
+                FMODUnity.RuntimeManager.PlayOneShot(successPuzzleEvent, transform.position);
+
                 spawnkey = true;
                 CameraController.instance.StartScriptedMovement(key.gameObject, feedbackCooldownTime);
             }

@@ -8,6 +8,8 @@ public class ColorRockScript : MonoBehaviour
     public int i;
     public Material materialRock;
 
+    [FMODUnity.EventRef]
+    public string changeColorEvent;
     private void Start()
     {
         materialRock = GetComponent<Renderer>().material;
@@ -22,6 +24,8 @@ public class ColorRockScript : MonoBehaviour
     }
     public void ChangeColorRock()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(changeColorEvent, transform.position);
+
         i++;
         if (i >= materialColorRockList.Count)
         {

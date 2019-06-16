@@ -12,6 +12,11 @@ public class ColorRockController : MonoBehaviour
 
     public float feedbackCooldown;
     private bool justSuccces;
+
+    [FMODUnity.EventRef]
+    public string successPuzzleEvent;
+
+    private bool soundDone = false;
     private void Start()
     {
         justSuccces = true;
@@ -21,6 +26,13 @@ public class ColorRockController : MonoBehaviour
         if (cristal1.activated && cristal2.activated && cristal3.activated)
         {
             chest.GetComponent<Animator>().SetBool("Open", true);
+            if (!soundDone)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(successPuzzleEvent, transform.position);
+                soundDone = true;
+            }
+
+
             if (justSuccces)CameraController.instance.StartScriptedMovement(chest, feedbackCooldown);
             justSuccces = false;
         }

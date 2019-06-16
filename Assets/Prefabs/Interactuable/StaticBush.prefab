@@ -90,6 +90,7 @@ MonoBehaviour:
     type: 3}
   cutDecal: {fileID: 4729030316922739633}
   weaponBranchHit: 0
+  bushCutEvent: event:/WORLD/W_CutBush
 --- !u!65 &8250437012458000339
 BoxCollider:
   m_ObjectHideFlags: 0

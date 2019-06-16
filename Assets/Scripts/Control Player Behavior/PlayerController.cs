@@ -94,6 +94,17 @@ public class PlayerController : MonoBehaviour
 
     protected StateMachine p_StateMachine = new StateMachine();
 
+    [FMODUnity.EventRef]
+    public string damageEvent;
+    [FMODUnity.EventRef]
+    public string dieEvent;
+    [FMODUnity.EventRef]
+    public string pickHealthEvent;
+    [FMODUnity.EventRef]
+    public string pickKeyEvent;
+
+   
+
     void Start()
     {
         playerAlive = true;
@@ -114,6 +125,9 @@ public class PlayerController : MonoBehaviour
         flyingDashFinished = false;
         checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
         dashTime = 0;
+
+
+
     }
     //private void OnLevelWasLoaded(int level)
     //{
@@ -267,6 +281,7 @@ public class PlayerController : MonoBehaviour
                         Player_GUI_System.instance.SetOnScreenPickUpIcon(true);
                         if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.F))
                         {
+                            FMODUnity.RuntimeManager.PlayOneShot(pickKeyEvent, transform.position);
                             PlayerManager.instance.AddItemToInventary(PlayerSensSystem.instance.nearestItem);
                             PlayerSensSystem.instance.nearestItem.CollectItem();
                             PlayerManager.instance.CountKeys();
@@ -275,6 +290,7 @@ public class PlayerController : MonoBehaviour
                         break;
                     case Item.ItemType.LIVE_UP:
                         PlayerSensSystem.instance.nearestItem.CollectItem();
+                        FMODUnity.RuntimeManager.PlayOneShot(pickHealthEvent, transform.position);
                         if (actualPlayerLive < playerLive && actualPlayerLive > 0 && !deathByFall)
                         {
                             actualPlayerLive++;
@@ -670,11 +686,13 @@ public class PlayerController : MonoBehaviour
         {
             if (actualPlayerLive > 0)
             {
+                FMODUnity.RuntimeManager.PlayOneShot(damageEvent, transform.position);
                 actualPlayerLive -= damage;
                 gettingHit = true;
             }
             else
             {
+                FMODUnity.RuntimeManager.PlayOneShot(dieEvent, transform.position);
                 GameManager.instance.PlayerDead();
             }
         }

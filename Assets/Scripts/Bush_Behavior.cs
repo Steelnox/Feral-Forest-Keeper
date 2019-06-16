@@ -26,6 +26,13 @@ public class Bush_Behavior : MonoBehaviour
     private Vector3 bushScenePos;
     private float respawnTimer;
 
+
+    [FMODUnity.EventRef]
+    public string bushCutEvent;
+
+    [FMODUnity.EventRef]
+    public string bushBranchEvent;
+
     void Start()
     {
         bushScenePos = bush_Pivot.transform.position;
@@ -93,8 +100,11 @@ public class Bush_Behavior : MonoBehaviour
     {
         if (!isCutted)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(bushCutEvent, transform.position);
+
             isCutted = true;
             HideBush();
+
             cutDecal.transform.position = bushScenePos + Vector3.up * 0.01f;
             SetParticles(bushScenePos);
             int random = (Random.Range(1, 100) * Random.Range(1, 100)) / 3;
@@ -144,6 +154,8 @@ public class Bush_Behavior : MonoBehaviour
         {
             if (PlayerManager.instance.leafSwordSlot == null)
             {
+                FMODUnity.RuntimeManager.PlayOneShot(bushBranchEvent, transform.position);
+
                 blendVector = GenericSensUtilities.instance.Transform2DTo3DMovement(GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.gameObject.transform.position, bush_Pivot.transform.position)));
                 desiredBlendVector = Vector3.up + (blendVector * 1 * blendScale);
                 weaponBranchHit = true;

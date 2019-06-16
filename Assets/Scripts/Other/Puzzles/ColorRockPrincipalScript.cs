@@ -16,6 +16,10 @@ public class ColorRockPrincipalScript : MonoBehaviour
     public Color colorRock;
 
     public bool activated;
+
+    [FMODUnity.EventRef]
+    public string successColorEvent;
+    public bool soundDone = false;
     void Start()
     {
         materialPrincipalRock = GetComponent<Renderer>().material;
@@ -67,10 +71,19 @@ public class ColorRockPrincipalScript : MonoBehaviour
         {
 
             materialPrincipalRock.SetColor("_EmissionColor", colorRock);
+
+            if (!soundDone)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(successColorEvent, transform.position);
+                soundDone = true;
+            }
         }
         else
         {
             materialPrincipalRock.SetColor("_EmissionColor", Color.black);
+
+            soundDone = false;
+
 
         }
     }

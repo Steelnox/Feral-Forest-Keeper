@@ -10,6 +10,9 @@ public class Switch_Behavior : MonoBehaviour
     public bool switched;
     public bool holdedSwitched;
 
+    [FMODUnity.EventRef]
+    public string switchEvent;
+
     public void OnTriggerEnter(Collider other)
     {
         if (other != null)
@@ -18,11 +21,15 @@ public class Switch_Behavior : MonoBehaviour
             MovableRocks rock = other.GetComponent<MovableRocks>();
             if (playerInteraction && player != null)
             {
+                FMODUnity.RuntimeManager.PlayOneShot(switchEvent, transform.position);
+
                 switched = true;
                 holdedSwitched = true;
             }
             if (rockInteraction && rock != null)
             {
+                FMODUnity.RuntimeManager.PlayOneShot(switchEvent, transform.position);
+
                 switched = true;
                 holdedSwitched = true;
             }
