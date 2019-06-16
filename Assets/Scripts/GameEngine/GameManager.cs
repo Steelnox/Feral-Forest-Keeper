@@ -156,6 +156,8 @@ public class GameManager : MonoBehaviour
             
             if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.Q))
             {
+                FMOD.Studio.Bus playerBus = FMODUnity.RuntimeManager.GetBus("Bus:/");
+                playerBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 SceneManager.LoadScene("Main Menu");
             }
             if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.E))

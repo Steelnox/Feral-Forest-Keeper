@@ -37,6 +37,9 @@ public class AmbientSoundScript : MonoBehaviour
 
     void Start()
     {
+        FMOD.Studio.Bus playerBus = FMODUnity.RuntimeManager.GetBus("Bus:/");
+        playerBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         BSOEvent = FMODUnity.RuntimeManager.CreateInstance(BSODir);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(BSOEvent, transform, GetComponent<Rigidbody>());
 
