@@ -25,6 +25,7 @@ public class OpenableDoors : MonoBehaviour
     public bool invertTraslationMovement;
 
     private bool activated;
+    [SerializeField]
     private bool opened;
     private bool locked;
     public bool finishOpen;
@@ -362,6 +363,7 @@ public class OpenableDoors : MonoBehaviour
             {
                 if (activationSwitch.IsSwitched())
                 {
+                    if (opened != true) OpenDoor();
                     if (cameraFeedback && actualSetupTimeLaps == 0 && justOpen && scripteMovementsRepetitions > 0)
                     {
                         //Debug.Log("openning door camera feedback");
@@ -418,6 +420,7 @@ public class OpenableDoors : MonoBehaviour
                 else
                 if (!activationSwitch.IsSwitched())
                 {
+                    //if (opened != false) opened = false;
                     if (cameraFeedback && actualSetupTimeLaps == 0 && justClose && scripteMovementsRepetitions > 0)
                     {
                         //Debug.Log("closing door camera feedback");
