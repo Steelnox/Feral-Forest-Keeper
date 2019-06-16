@@ -212,6 +212,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   actualBehavior: 0
   actualLocalRotation: {x: 0, y: 0, z: 0}
   rotationSmoothness: 1

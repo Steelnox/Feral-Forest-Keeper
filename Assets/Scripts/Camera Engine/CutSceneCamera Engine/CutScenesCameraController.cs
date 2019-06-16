@@ -44,6 +44,7 @@ public class CutScenesCameraController : MonoBehaviour
         actualBehavior = CutSceneCameraBehavior.MOVE_BETWEEN_KEYS;
         //ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
         //origin = cameraPivot.transform.position;
+        myCamera.transform.localRotation = Quaternion.Euler(actualKeyPoint.localRotation);
         cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
         origin = actualKeyPoint.transform.position;
         actualKeyPointID++;
@@ -173,6 +174,7 @@ public class CutScenesCameraController : MonoBehaviour
                 else
                     if (actualScene.sceneKeyPoints[actualKeyPointID].startKey)
                 {
+                    myCamera.transform.localRotation = Quaternion.Euler(actualKeyPoint.localRotation);
                     cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
                     origin = actualKeyPoint.transform.position;
                     actualKeyPointID++;
