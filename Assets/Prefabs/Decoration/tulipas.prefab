@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1369554719703249936}
   - component: {fileID: 1369554719704052784}
   - component: {fileID: 1369554719705020144}
+  - component: {fileID: 5322169051813479099}
   m_Layer: 0
   m_Name: Tulip002
   m_TagString: Untagged
@@ -77,6 +78,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5322169051813479099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
 --- !u!1 &1369554719702820914
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +102,7 @@ GameObject:
   - component: {fileID: 1369554719703249938}
   - component: {fileID: 1369554719704052786}
   - component: {fileID: 1369554719705020146}
+  - component: {fileID: 5883254984169353597}
   m_Layer: 0
   m_Name: Tulip003
   m_TagString: Untagged
@@ -154,6 +169,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5883254984169353597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
 --- !u!1 &1369554719702820916
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +193,7 @@ GameObject:
   - component: {fileID: 1369554719703249940}
   - component: {fileID: 1369554719704052788}
   - component: {fileID: 1369554719705020148}
+  - component: {fileID: 573862859151011515}
   m_Layer: 0
   m_Name: Tulip
   m_TagString: Untagged
@@ -231,6 +260,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &573862859151011515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
 --- !u!1 &1369554719702820918
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +284,7 @@ GameObject:
   - component: {fileID: 1369554719703249942}
   - component: {fileID: 1369554719704052790}
   - component: {fileID: 1369554719705020150}
+  - component: {fileID: 2819298498119397796}
   m_Layer: 0
   m_Name: Tulip001
   m_TagString: Untagged
@@ -308,6 +351,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2819298498119397796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
 --- !u!1 &1369554719702820920
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +375,7 @@ GameObject:
   - component: {fileID: 1369554719703249944}
   - component: {fileID: 1369554719704052792}
   - component: {fileID: 1369554719705020152}
+  - component: {fileID: 7918484048787019886}
   m_Layer: 0
   m_Name: Tulip006
   m_TagString: Untagged
@@ -385,6 +442,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7918484048787019886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
 --- !u!1 &1369554719702820922
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +503,7 @@ GameObject:
   - component: {fileID: 1369554719703249948}
   - component: {fileID: 1369554719704052796}
   - component: {fileID: 1369554719705020156}
+  - component: {fileID: 1631801090610619463}
   m_Layer: 0
   m_Name: Tulip004
   m_TagString: Untagged
@@ -499,6 +570,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1631801090610619463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
 --- !u!1 &1369554719702820926
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +594,7 @@ GameObject:
   - component: {fileID: 1369554719703249950}
   - component: {fileID: 1369554719704052798}
   - component: {fileID: 1369554719705020158}
+  - component: {fileID: 4648007976247817684}
   m_Layer: 0
   m_Name: Tulip005
   m_TagString: Untagged
@@ -576,3 +661,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4648007976247817684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369554719702820926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ff1344f4bc832419f07116b67046b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightDegradateLightingShader_Material: {fileID: 0}
