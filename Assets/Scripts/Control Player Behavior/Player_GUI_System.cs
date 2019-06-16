@@ -27,14 +27,10 @@ public class Player_GUI_System : MonoBehaviour
     public RectTransform buttonBWoodSign;
     public RectTransform buttonBSkillRunes;
 
-    public RectTransform leafWeaponIcon;
-    public RectTransform branchWeaponIcon;
-    public RectTransform strengthForestIcon;
+    
     public Text keysCount;
 
-    private Vector2 leafWeaponIconOnScrenPos;
     private Vector2 actionIconOnScreenPos;
-    private Vector2 strengthIconOnScreenPos;
     private Vector2 hidePos;
 
     void Awake()
@@ -42,18 +38,13 @@ public class Player_GUI_System : MonoBehaviour
         if (instance == null) instance = this;
         if (instance != this) Destroy(this);
 
-        leafWeaponIconOnScrenPos = leafWeaponIcon.anchoredPosition;
         actionIconOnScreenPos = buttonBColor.anchoredPosition;
-        strengthIconOnScreenPos = strengthForestIcon.anchoredPosition;
 
         hidePos = Vector2.right * 1000;
         SetOnScreenPushIcon(false);
         SetOnScreenPickUpIcon(false);
         SetOnScreenUnlockDoorIcon(false);
-        SetOnScreenLeafWeaponIcon(false);
-        SetOnScreenBranchWeaponIcon(false);
         SetOnScreenActivateSanctuaryIcon(false);
-        SetOnScreenStrenfthForestIcon(false);
         SetOnScreenButtonBColor(false);
         SetOnScreenButtonBSimon(false);
         SetOnScreenButtonBSkillRunes(false);
@@ -98,28 +89,7 @@ public class Player_GUI_System : MonoBehaviour
             unlockDoorIcon.anchoredPosition = hidePos;
         }
     }
-    public void SetOnScreenLeafWeaponIcon(bool b)
-    {
-        if (b)
-        {
-            leafWeaponIcon.anchoredPosition = leafWeaponIconOnScrenPos;
-        }
-        else
-        {
-            leafWeaponIcon.anchoredPosition = hidePos;
-        }
-    }
-    public void SetOnScreenBranchWeaponIcon(bool b)
-    {
-        if (b)
-        {
-            branchWeaponIcon.anchoredPosition = leafWeaponIconOnScrenPos;
-        }
-        else
-        {
-            branchWeaponIcon.anchoredPosition = hidePos;
-        }
-    }
+   
     public void SetOnScreenActivateSanctuaryIcon(bool b)
     {
         if (b)
@@ -131,17 +101,7 @@ public class Player_GUI_System : MonoBehaviour
             activateSanctuaryIcon.anchoredPosition = hidePos;
         }
     }
-    public void SetOnScreenStrenfthForestIcon(bool b)
-    {
-        if (b)
-        {
-            strengthForestIcon.anchoredPosition = strengthIconOnScreenPos;
-        }
-        else
-        {
-            strengthForestIcon.anchoredPosition = hidePos;
-        }
-    }
+    
 
     public void SetOnScreenButtonBColor(bool b)
     {

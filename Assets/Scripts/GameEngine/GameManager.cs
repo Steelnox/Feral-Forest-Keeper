@@ -209,10 +209,6 @@ public class GameManager : MonoBehaviour
             PlayerManager.instance.branchWeaponForAnimations.SetActive(false);
             PlayerManager.instance.leafWeaponForAnimations.SetActive(false);
 
-            Player_GUI_System.instance.SetOnScreenBranchWeaponIcon(false);
-            Player_GUI_System.instance.SetOnScreenLeafWeaponIcon(false);
-            Player_GUI_System.instance.SetOnScreenStrenfthForestIcon(false);
-
             PlayerManager.instance.branchWeaponSlot = null;
             PlayerManager.instance.leafSwordSlot = null;
             PlayerManager.instance.powerGauntletSlot = null;

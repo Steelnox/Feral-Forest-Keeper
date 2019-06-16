@@ -34,18 +34,21 @@ public class PlayerManager : MonoBehaviour
     public float skillPillarsInteractionDistance;
     public float sanctuaryInteractionDistance;
 
+    private PlayerController playerController;
+
+    public GameObject canvas;
+
     void Start()
     {
         //branchWeaponSlot = GameManager.instance.branchItem;
         //CheckIfHaveBranchWeaponItem();
 
-        
+        playerController = PlayerController.instance;
+
         if (PlayerController.instance.startWithAllSkills)
         {
             leafSwordSlot = GameManager.instance.swordItem;
             CheckIfHaveLeafWeaponItem();
-
-            Player_GUI_System.instance.SetOnScreenStrenfthForestIcon(true);
 
             powerGauntletSlot = GameManager.instance.gantletItem;
             dashSkillSlot = GameManager.instance.dashItem;
@@ -64,7 +67,23 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
+        if(dashSkillSlot == null)
+        {
+            canvas.SetActive(false);
+        }
+        else
+        {
+            if (playerController.dashCooldown >= playerController.dashCooldownTime)
+            {
+                canvas.SetActive(false);
+            }
+            else
+            {
+                canvas.SetActive(true);
+            }
+        }
 
+        
     }
     public void AddItemToInventary(Item i)
     {
@@ -93,12 +112,10 @@ public class PlayerManager : MonoBehaviour
         {
             branchWeaponForAnimations.SetActive(true);
             PlayerAnimationController.instance.SetWeaponAnim(true);
-            Player_GUI_System.instance.SetOnScreenBranchWeaponIcon(true);
         }
         else
         {
             PlayerAnimationController.instance.SetWeaponAnim(false);
-            Player_GUI_System.instance.SetOnScreenBranchWeaponIcon(false);
         }
     }
     public void CheckIfHaveLeafWeaponItem()
@@ -115,14 +132,11 @@ public class PlayerManager : MonoBehaviour
         {
             branchWeaponForAnimations.SetActive(false);
             leafWeaponForAnimations.SetActive(true);
-            Player_GUI_System.instance.SetOnScreenBranchWeaponIcon(false);
             PlayerAnimationController.instance.SetWeaponAnim(true);
-            Player_GUI_System.instance.SetOnScreenLeafWeaponIcon(true);
         }
         else
         {
             PlayerAnimationController.instance.SetWeaponAnim(false);
-            Player_GUI_System.instance.SetOnScreenLeafWeaponIcon(false);
         }
     }
     public void CountKeys()
