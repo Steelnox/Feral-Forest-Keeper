@@ -11,8 +11,14 @@ public class ShowWeapon_PlayerState : State
     private Vector3 showingDirection;
     private float showingWeaponCount;
 
+
+    [FMODUnity.EventRef]
+    public string rewardEvent;
+
     public override void Enter()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(rewardEvent, transform.position);
+
         PlayerController.instance.showingWeapon = true;
         PlayerController.instance.SetCanMove(false);
         showingWeaponInitForward = PlayerController.instance.playerRoot.transform.forward;

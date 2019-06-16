@@ -90,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorRock: {r: 0, g: 0.04290104, b: 1, a: 0}
   materialRock: {fileID: 0}
+  colorChangeEvent: event:/GUI n PUZZLES/plop
 --- !u!1001 &1238335694776068522
 PrefabInstance:
   m_ObjectHideFlags: 0

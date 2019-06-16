@@ -85,6 +85,15 @@ public class MovableRocks : MonoBehaviour
     public void SetBeingPushed(bool b)
     {
         beingPushed = b;
+        if(beingPushed == true)
+        {
+            myRigidbody.isKinematic = false;
+        }
+        if(beingPushed == false && falling == false)
+        {
+            myRigidbody.isKinematic = true;
+
+        }
     }
     public bool CheckIfFalling()
     {

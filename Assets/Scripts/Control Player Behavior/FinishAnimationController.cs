@@ -16,7 +16,8 @@ public class FinishAnimationController : MonoBehaviour
     [FMODUnity.EventRef]
     public string fallingEvent;
 
-    
+
+
     void Start()
     {
         dashArriveIsDone = true;
@@ -62,4 +63,5 @@ public class FinishAnimationController : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(fallingEvent, transform.position);
     }
 
+   
 }

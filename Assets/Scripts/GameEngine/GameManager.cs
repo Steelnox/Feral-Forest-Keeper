@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
             }
             if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.E))
             {
-                SceneManager.LoadScene("Lvl1 Def");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 //ResetGame();
             }
         }

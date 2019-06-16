@@ -42,6 +42,7 @@ public class OpenableDoors : MonoBehaviour
     [SerializeField]
     private Vector3 closePositionTraslationVector;
 
+
     void Start()
     {
         //Debug.Log("Bounds X = " + doorBody.GetComponent<MeshRenderer>().bounds.size.x);
@@ -456,6 +457,7 @@ public class OpenableDoors : MonoBehaviour
                 }
             }
         }
+
     }
     private void UnlockDoor()
     {

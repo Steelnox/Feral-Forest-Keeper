@@ -49,6 +49,10 @@ public class AmbientSoundScript : MonoBehaviour
         birdsEvent = FMODUnity.RuntimeManager.CreateInstance(birdsDir);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(birdsEvent, transform, GetComponent<Rigidbody>());
 
+        BSOEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        windEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        waterEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
         birdsEvent.start();
 
         soundWindDoing = false;

@@ -37,8 +37,19 @@ public class SimonController : MonoBehaviour
 
     public float feedbackCooldownTime;
 
+    public bool soundDone = false;
+
     [FMODUnity.EventRef]
     public string successPuzzleEvent;
+
+    [FMODUnity.EventRef]
+    public string successRoundEvent;
+
+    [FMODUnity.EventRef]
+    public string failRoundEvent;
+
+    [FMODUnity.EventRef]
+    public string colorChangeEvent;
 
     #region Singleton
 
@@ -173,9 +184,11 @@ public class SimonController : MonoBehaviour
                 i = 0;
                 sequenceCount = 0;
                 fail = true;
+
+                FMODUnity.RuntimeManager.PlayOneShot(failRoundEvent, transform.position);
+
                 for (int count = 0; count < enemySimonList.Count; count++)
                 {
-
                     enemySimonList[count].GetComponent<Enemy>().currentHealth = 3;
                     enemySimonList[count].GetComponent<Enemy>().HealthBar.transform.localScale = new Vector3(1,1,1);
                     enemySimonList[count].GetComponent<Enemy>().HealthBar.SetActive(false);
@@ -219,6 +232,8 @@ public class SimonController : MonoBehaviour
 
     private void AddNewColor()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(successRoundEvent, transform.position);
+
         randomNumber = Random.Range(0, colorRocks.Count);
         numList.Add(randomNumber);
         while (randomNumber == numList[countRandom - 1])
@@ -237,6 +252,12 @@ public class SimonController : MonoBehaviour
         {
             colorRocks[numList[sequenceCount]].GetComponent<Renderer>().material = colorMaterial;
             colorRocks[numList[sequenceCount]].GetComponent<Renderer>().material.color = colorRocks[numList[sequenceCount]].GetComponent<SimonRock>().colorRock;
+            if (!soundDone)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot(colorChangeEvent, transform.position);
+                soundDone = true;
+            }
+
             timer += Time.deltaTime;
             if (timer >= timeColored)
             {
@@ -244,6 +265,7 @@ public class SimonController : MonoBehaviour
                 colorRocks[numList[sequenceCount]].GetComponent<Renderer>().material.color = Color.white;
                 sequenceCount++;
                 timer = 0;
+                soundDone = false;
             }
         }
 
