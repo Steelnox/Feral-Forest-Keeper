@@ -421,6 +421,7 @@ public class OpenableDoors : MonoBehaviour
                             }
                             break;
                     }
+                    if (finishOpen) openEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 }
                 else
                 if (!activationSwitch.IsSwitched())

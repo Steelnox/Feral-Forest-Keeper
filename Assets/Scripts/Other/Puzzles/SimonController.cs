@@ -161,7 +161,7 @@ public class SimonController : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot(successPuzzleEvent, transform.position);
 
                 spawnkey = true;
-                CameraController.instance.StartScriptedMovement(key.gameObject, feedbackCooldownTime);
+                //CameraController.instance.StartScriptedMovement(key.gameObject, feedbackCooldownTime);
             }
             
         }
