@@ -8,7 +8,7 @@ public class CutScenesCameraController : MonoBehaviour
     public Camera myCamera;
     public SceneParameters[] scenes;
 
-    public enum CutSceneCameraBehavior { MOVE_BETWEEN_KEYS, CHANGE_KEY, CHANGE_SCENE };
+    public enum CutSceneCameraBehavior { MOVE_BETWEEN_KEYS, CHANGE_SCENE };
     public CutSceneCameraBehavior actualBehavior;
 
     public Vector3 actualLocalRotation;
@@ -30,8 +30,9 @@ public class CutScenesCameraController : MonoBehaviour
         actualScene = scenes[actualSceneID];
         actualKeyPointID = 0;
         actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
-        //actualBehavior = CutSceneCameraBehavior.MOVE_BETWEEN_KEYS;
-        ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
+        actualBehavior = CutSceneCameraBehavior.MOVE_BETWEEN_KEYS;
+        //ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
+        origin = cameraPivot.transform.position;
     }
 
     void Update()
@@ -39,34 +40,40 @@ public class CutScenesCameraController : MonoBehaviour
         switch(actualBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
-                if (GenericSensUtilities.instance.DistanceBetween2Vectors(cameraPivot.transform.position, actualScene.sceneKeyPoints[actualKeyPointID].transform.position) > 0.1f)
+                if (GenericSensUtilities.instance.DistanceBetween2Vectors(cameraPivot.transform.position, actualKeyPoint.transform.position) > 0.1f)
                 {
-                    Debug.Log("MovingCamera");
+                    //Debug.Log("MovingCamera");
                     MoveCamera(origin, actualKeyPoint.transform.position, actualKeyPoint.speed);
                     //myCamera.transform.localEulerAngles = Vector3.Lerp(myCamera.transform.localEulerAngles, actualKeyPoint.localRotation, Time.deltaTime * 5);
                 }
                 else
                 {
-                    ChangeBehavior(CutSceneCameraBehavior.CHANGE_KEY);
-                }
-                break;
-            case CutSceneCameraBehavior.CHANGE_KEY:
-                if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1)
-                {
-                    actualKeyPointID++;
-                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
-                    ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
-                }
-                else
-                if (actualKeyPointID >= actualScene.sceneKeyPoints.Length)
-                {
-                    ChangeBehavior(CutSceneCameraBehavior.CHANGE_SCENE);
+                    //if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1)
+                    //{
+                    //    actualKeyPointID++;
+                    //    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                    //    origin = cameraPivot.transform.position;
+                    //    //ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
+                    //}
+                    //ChangeBehavior(CutSceneCameraBehavior.CHANGE_KEY);
+                    if (actualKeyPoint.endKey)
+                    {
+                        ChangeBehavior(CutSceneCameraBehavior.CHANGE_SCENE);
+                    }
+                    else
+                    {
+                        ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
+                    }
                 }
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
                 ChangeScene();
                 ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
                 break;
+            //case CutSceneCameraBehavior.CHANGE_SCENE:
+            //    ChangeScene();
+            //    ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
+            //    break;
         }
     }
     private void ChangeScene()
@@ -96,38 +103,33 @@ public class CutScenesCameraController : MonoBehaviour
         switch (actualBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
-                
-                break;
-            case CutSceneCameraBehavior.CHANGE_KEY:
-                
+                if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1 && !actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                {
+                    origin = actualKeyPoint.transform.position;
+                    actualKeyPointID++;
+                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                }
+                else 
+                    if(actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                {
+                    cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
+                    origin = actualKeyPoint.transform.position;
+                    actualKeyPointID++;
+                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                }
+                actualMovementTime = 0;
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
-                //cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
+                origin = cameraPivot.transform.position;
                 break;
         }
         switch (newBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
-                if (actualScene.sceneKeyPoints[actualKeyPointID].endKey)
-                {
-                    ChangeBehavior(CutSceneCameraBehavior.CHANGE_SCENE);
-                }
-                else
-                if (actualScene.sceneKeyPoints[actualKeyPointID].startKey)
-                {
-                    origin = cameraPivot.transform.position;
-                }
 
-                break;
-            case CutSceneCameraBehavior.CHANGE_KEY:
                 
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
-                //if (actualSceneID >= scenes.Length - 1)
-                //{
-                //    actualSceneID = -1;
-                //    actualScene = scenes[actualSceneID];
-                //}
                 
                 break;
         }
