@@ -9,11 +9,16 @@ public class Sanctuary : MonoBehaviour
     public PlayerManager playerManager;
 
     public Vector3 positionCheckpoint;
-    public Material materialActivated;
 
     private bool activatedSanctuary;
     private bool actionDone;
-    private Renderer renderer;
+
+    [FMODUnity.EventRef]
+    public string successEvent;
+
+    public GameObject particles1;
+    public GameObject particles2;
+
 
     void Start()
     {
@@ -22,7 +27,6 @@ public class Sanctuary : MonoBehaviour
         activatedSanctuary = false;
         actionDone = false;
         positionCheckpoint = new Vector3(transform.position.x, transform.position.y , transform.position.z - 1 );
-        renderer = GetComponent<Renderer>();
     }
 
     
@@ -30,9 +34,12 @@ public class Sanctuary : MonoBehaviour
     {
         if(activatedSanctuary && !actionDone)
         {
-            renderer.material = materialActivated;
             checkpoint.transform.position = positionCheckpoint;
-            
+
+            FMODUnity.RuntimeManager.PlayOneShot(successEvent, transform.position);
+
+            particles1.SetActive(true);
+            particles2.SetActive(true);
 
 
             actionDone = true;

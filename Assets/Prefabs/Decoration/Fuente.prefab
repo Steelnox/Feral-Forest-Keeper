@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3267474284027186824}
   - component: {fileID: 3267474284028316744}
   - component: {fileID: 398170679886427908}
+  - component: {fileID: 7798038623642275816}
   m_Layer: 0
   m_Name: Fuente
   m_TagString: Untagged
@@ -92,3 +93,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: f34a293c72dfdd04baba9c411a7d1872, type: 3}
+--- !u!208 &7798038623642275816
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3267474284026122888}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.0910001, y: 0.952, z: 0.27800003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.27600002}
+  m_TimeToStationary: 0.5

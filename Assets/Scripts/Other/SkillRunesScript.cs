@@ -12,6 +12,9 @@ public class SkillRunesScript : MonoBehaviour
     public bool dashRune;
     public bool forceRune;
 
+    [FMODUnity.EventRef]
+    public string successEvent;
+
     private void Start()
     {
         playerManager = PlayerManager.instance;
@@ -21,11 +24,15 @@ public class SkillRunesScript : MonoBehaviour
     {
         if (dashRune)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(successEvent, transform.position);
+
             playerManager.dashSkillSlot = dash;
         }
 
         if (forceRune)
         {
+            FMODUnity.RuntimeManager.PlayOneShot(successEvent, transform.position);
+
             playerManager.powerGauntletSlot = gauntlet;
         }
     }
