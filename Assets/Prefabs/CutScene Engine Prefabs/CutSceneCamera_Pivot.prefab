@@ -207,9 +207,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPivot: {fileID: 1270132344234598987}
   myCamera: {fileID: 4406691976881661969}
-  scenes: []
+  scenes:
+  - {fileID: 0}
+  - {fileID: 0}
   actualBehavior: 0
   actualLocalRotation: {x: 0, y: 0, z: 0}
   actualFieldOfView: 0
   actualDepthOfField: 0
   actualSpeed: 0
+  actualScene: {fileID: 0}
+  actualSceneID: 0
+  actualKeyPoint: {fileID: 0}
+  actualKeyPointID: 0
+  actualMovementTime: 0
+  origin: {x: 0, y: 0, z: 0}

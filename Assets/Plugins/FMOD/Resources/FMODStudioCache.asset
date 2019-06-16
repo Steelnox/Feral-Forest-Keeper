@@ -64,12 +64,13 @@ MonoBehaviour:
   - {fileID: 114632436581049084}
   - {fileID: 114525007524471070}
   - {fileID: 114642587894353166}
+  - {fileID: 114660783252034354}
   EditorParameters: []
   MasterBanks:
   - {fileID: 114366706507324734}
   StringsBanks:
   - {fileID: 114343964213916050}
-  stringsBankWriteTime: 636963092764851193
+  stringsBankWriteTime: 636963186294195828
   cacheVersion: 3
 --- !u!114 &114001866934749554
 MonoBehaviour:
@@ -4997,11 +4998,11 @@ MonoBehaviour:
   Path: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
     FMOD project\Build\Desktop\Master.strings.bank
   SubDir: 
-  lastModified: 636963092764851193
+  lastModified: 636963186294195828
   LoadResult: 0
   FileSizes:
-  - Name: Desktop
-    Value: 2982
+  - Name: 
+    Value: 3018
   Exists: 1
 --- !u!114 &114344046392381122
 MonoBehaviour:
@@ -5409,11 +5410,11 @@ MonoBehaviour:
   Path: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
     FMOD project\Build\Desktop\Master.bank
   SubDir: 
-  lastModified: 636963092764791151
+  lastModified: 636963186294080748
   LoadResult: 0
   FileSizes:
-  - Name: Desktop
-    Value: 3848928
+  - Name: 
+    Value: 3855488
   Exists: 1
 --- !u!114 &114366833350734070
 MonoBehaviour:
@@ -10558,6 +10559,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1668
+--- !u!114 &114660783252034354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/E_MELEE/E_Melee_Chase
+  m_EditorClassIdentifier: 
+  Path: event:/E_MELEE/E_Melee_Chase
+  guid: df0f4b70153dca41b774366f0fbf5c70
+  Banks:
+  - {fileID: 114366706507324734}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 569
 --- !u!114 &114663812976748038
 MonoBehaviour:
   m_ObjectHideFlags: 0

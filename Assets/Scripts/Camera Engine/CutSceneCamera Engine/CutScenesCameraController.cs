@@ -32,7 +32,11 @@ public class CutScenesCameraController : MonoBehaviour
         actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
         actualBehavior = CutSceneCameraBehavior.MOVE_BETWEEN_KEYS;
         //ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
-        origin = cameraPivot.transform.position;
+        //origin = cameraPivot.transform.position;
+        cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
+        origin = actualKeyPoint.transform.position;
+        actualKeyPointID++;
+        actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
     }
 
     void Update()
@@ -103,21 +107,21 @@ public class CutScenesCameraController : MonoBehaviour
         switch (actualBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
-                if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1 && !actualScene.sceneKeyPoints[actualKeyPointID].startKey)
-                {
-                    origin = actualKeyPoint.transform.position;
-                    actualKeyPointID++;
-                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
-                }
-                else 
-                    if(actualScene.sceneKeyPoints[actualKeyPointID].startKey)
-                {
-                    cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
-                    origin = actualKeyPoint.transform.position;
-                    actualKeyPointID++;
-                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
-                }
-                actualMovementTime = 0;
+                //if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1 && !actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                //{
+                //    origin = actualKeyPoint.transform.position;
+                //    actualKeyPointID++;
+                //    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                //}
+                //else 
+                //    if(actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                //{
+                //    cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
+                //    origin = actualKeyPoint.transform.position;
+                //    actualKeyPointID++;
+                //    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                //}
+                //actualMovementTime = 0;
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
                 origin = cameraPivot.transform.position;
@@ -126,8 +130,22 @@ public class CutScenesCameraController : MonoBehaviour
         switch (newBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
+                if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1 && !actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                {
+                    origin = actualKeyPoint.transform.position;
+                    actualKeyPointID++;
+                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                }
+                else
+                    if (actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                {
+                    cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
+                    origin = actualKeyPoint.transform.position;
+                    actualKeyPointID++;
+                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                }
+                actualMovementTime = 0;
 
-                
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
                 
