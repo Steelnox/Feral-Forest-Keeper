@@ -689,7 +689,8 @@ public class PlayerController : MonoBehaviour
                 actualPlayerLive -= damage;
                 gettingHit = true;
             }
-            else
+            
+            if (actualPlayerLive == 0)
             {
                 FMODUnity.RuntimeManager.PlayOneShot(dieEvent, transform.position);
                 GameManager.instance.PlayerDead();

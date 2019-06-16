@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
                     deathByFall = false;
                     if (PlayerController.instance.actualPlayerLive <= 0)
                     {
-                        playerDead = true;
+                        PlayerDead();
                     }
                 }
             }
@@ -151,11 +151,11 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Entering Death by Dying");
             PlayerController.instance.noInput = true;
             if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
-            if (Input.GetButtonDown("Back") || Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.Q))
             {
-                Application.Quit();
+                SceneManager.LoadScene("Main Menu");
             }
-            if (Input.GetButtonDown("X") || Input.GetKeyDown(KeyCode.E))
+            if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.E))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 //ResetGame();

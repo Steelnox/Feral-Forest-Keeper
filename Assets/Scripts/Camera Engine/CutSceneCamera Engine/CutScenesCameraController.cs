@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CutScenesCameraController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class CutScenesCameraController : MonoBehaviour
     public float actualFieldOfView;
     public float actualDepthOfField;
     public float actualSpeed;
+    public float depthSmoothness;
 
     public SceneParameters actualScene;
     public int actualSceneID;
@@ -24,8 +26,15 @@ public class CutScenesCameraController : MonoBehaviour
     public float actualMovementTime;
     public Vector3 origin;
 
+    public PostProcessVolume globalVolume;
+    private DepthOfField depthOfField;
+
     void Start()
     {
+        if (globalVolume != null)
+        {
+            globalVolume.profile.TryGetSettings(out depthOfField);
+        }
         actualSceneID = 0;
         actualScene = scenes[actualSceneID];
         actualKeyPointID = 0;
@@ -37,6 +46,8 @@ public class CutScenesCameraController : MonoBehaviour
         origin = actualKeyPoint.transform.position;
         actualKeyPointID++;
         actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+        actualDepthOfField = actualKeyPoint.depthOfField;
+        SetDepthOfView(actualDepthOfField);
     }
 
     void Update()
@@ -44,6 +55,14 @@ public class CutScenesCameraController : MonoBehaviour
         switch(actualBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
+                if (actualDepthOfField != actualKeyPoint.depthOfField)
+                {
+                    actualDepthOfField = Mathf.Lerp(actualDepthOfField, actualKeyPoint.depthOfField, Time.deltaTime * depthSmoothness);
+                }
+                else
+                {
+                    actualDepthOfField = actualKeyPoint.depthOfField;
+                }
                 if (GenericSensUtilities.instance.DistanceBetween2Vectors(cameraPivot.transform.position, actualKeyPoint.transform.position) > 0.1f)
                 {
                     //Debug.Log("MovingCamera");
@@ -79,6 +98,7 @@ public class CutScenesCameraController : MonoBehaviour
             //    ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
             //    break;
         }
+        SetDepthOfView(actualDepthOfField);
     }
     private void ChangeScene()
     {
@@ -135,6 +155,7 @@ public class CutScenesCameraController : MonoBehaviour
                     origin = actualKeyPoint.transform.position;
                     actualKeyPointID++;
                     actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                    actualDepthOfField = actualKeyPoint.depthOfField;
                 }
                 else
                     if (actualScene.sceneKeyPoints[actualKeyPointID].startKey)
@@ -143,6 +164,8 @@ public class CutScenesCameraController : MonoBehaviour
                     origin = actualKeyPoint.transform.position;
                     actualKeyPointID++;
                     actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                    actualDepthOfField = actualKeyPoint.depthOfField;
+                    SetDepthOfView(actualDepthOfField);
                 }
                 actualMovementTime = 0;
 
@@ -158,5 +181,13 @@ public class CutScenesCameraController : MonoBehaviour
         actualMovementTime += Time.deltaTime;
         float evaluateTime = actualMovementTime / time;
         cameraPivot.transform.position = Vector3.Lerp(KeyPositionOrigin, keyPositionEnd, evaluateTime);
+    }
+    public void SetDepthOfView(float depth)
+    {
+        depthOfField.focusDistance.value = depth;
+    }
+    public float GetActualDepthOfView()
+    {
+        return depthOfField.focusDistance.value;
     }
 }
