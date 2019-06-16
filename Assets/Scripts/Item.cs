@@ -26,6 +26,17 @@ public class Item : MonoBehaviour
             myParticles.PlayComposition(transform.position);
         }
     }
+    private void OnLevelWasLoaded(int level)
+    {
+        onScenPoition = transform.position;
+        curve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+        curve.postWrapMode = WrapMode.PingPong;
+        if (!collected)
+        {
+            myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
+            myParticles.PlayComposition(transform.position);
+        }
+    }
     public void Update()
     {
         if (!collected)
