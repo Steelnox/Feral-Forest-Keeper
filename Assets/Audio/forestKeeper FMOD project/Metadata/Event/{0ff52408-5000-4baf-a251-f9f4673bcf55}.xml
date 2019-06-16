@@ -80,6 +80,9 @@
 			<destination>{68d79f26-ca71-4259-ae42-4e27798db597}</destination>
 			<destination>{87d25d77-8b96-444e-81d8-a4f8a0664084}</destination>
 		</relationship>
+		<relationship name="markers">
+			<destination>{016df981-6d62-42dd-9cc4-1ebb4fb7f7c9}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{95749a13-48ae-42ae-96b9-6afde7a30fc5}">
 		<relationship name="effectChain">
@@ -107,6 +110,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{e60bc091-370b-4a37-bffd-8a1f35b9f429}">
+		<property name="volume">
+			<value>-13.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -129,6 +135,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{7955a70c-53ed-4a05-b0eb-1cc1ca76b642}">
+		<property name="volume">
+			<value>-13.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 2</value>
 		</property>
@@ -140,6 +149,20 @@
 		</relationship>
 		<relationship name="output">
 			<destination>{95749a13-48ae-42ae-96b9-6afde7a30fc5}</destination>
+		</relationship>
+	</object>
+	<object class="LoopRegion" id="{016df981-6d62-42dd-9cc4-1ebb4fb7f7c9}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="length">
+			<value>31.299818594104309</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{5c79a1ba-68ea-41da-8c6a-b91bfb49dff5}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{39557f0f-c78d-4c24-94ab-b79e1fc96ec6}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{35232efe-3578-49a1-af4f-96b1777d7c6e}">
