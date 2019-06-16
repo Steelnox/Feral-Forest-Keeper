@@ -12,6 +12,11 @@ public class PushRock_State : State
     private float actualContactDistance;
     private MovableRocks lastMovableRock;
 
+
+    private FMOD.Studio.EventInstance pushEvent;
+    [FMODUnity.EventRef]
+    public string pushDir;
+
     public override void Enter()
     {
         PlayerController.instance.pushing = true;
@@ -23,6 +28,11 @@ public class PushRock_State : State
         PlayerController.instance.MovingInSlowZone(true);
         constactDistance = GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.transform.position, PlayerSensSystem.instance.nearestRock.FindContactPoint(PlayerController.instance.transform.position));
         lastMovableRock = PlayerSensSystem.instance.nearestRock;
+
+
+        pushEvent = FMODUnity.RuntimeManager.CreateInstance(pushDir);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(pushEvent, transform, GetComponent<Rigidbody>());
+        pushEvent.start();
     }
     public override void Execute()
     {
@@ -83,7 +93,7 @@ public class PushRock_State : State
         //Debug.Log("Rock-Grass Direction = " + GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerSensSystem.instance.nearestRock.bodyMeshrenderer.bounds.ClosestPoint(PlayerSensSystem.instance.FindNearestGrassBushToPushingRock(PlayerSensSystem.instance.nearestRock).transform.position), PlayerSensSystem.instance.FindNearestGrassBushToPushingRock(PlayerSensSystem.instance.nearestRock).transform.position));
         //Debug.Log("Player-Rock Direction = " + GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.playerRoot.transform.position, PlayerSensSystem.instance.nearestRock.bodyMeshrenderer.bounds.ClosestPoint(PlayerController.instance.transform.position)));
         //Debug.DrawLine(PlayerSensSystem.instance.nearestRock.transform.position, PlayerSensSystem.instance.FindNearestGrassBushToPushingRock(PlayerSensSystem.instance.nearestRock).transform.position, Color.black);
-        Debug.DrawLine(PlayerController.instance.playerRoot.transform.position, PlayerSensSystem.instance.nearestRock.transform.position, Color.yellow);
+        //Debug.DrawLine(PlayerController.instance.playerRoot.transform.position, PlayerSensSystem.instance.nearestRock.transform.position, Color.yellow);
     }
     public override void Exit()
     {
@@ -93,5 +103,7 @@ public class PushRock_State : State
         PlayerSensSystem.instance.nearestRock.SetBeingPushed(false);
         PlayerController.instance.MovingInSlowZone(false);
         PlayerController.instance.pushing = false;
+
+        pushEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }

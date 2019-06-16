@@ -20,6 +20,9 @@ public class Dash_PlayerState : State
     private Vector3 startPosition;
     private Vector3 endPosition;
 
+    [FMODUnity.EventRef]
+    public string dashEvent;
+
     public override void Enter()
     {
         count = dashLifeTime;
@@ -38,6 +41,9 @@ public class Dash_PlayerState : State
         evaluateTime = 0;
         startPosition = PlayerController.instance.transform.position;
         endPosition = startPosition + (dashDirection * dashLenght);
+
+        FMODUnity.RuntimeManager.PlayOneShot(dashEvent, transform.position);
+
     }
     public override void Execute()
     {

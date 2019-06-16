@@ -780,7 +780,7 @@ public class PlayerSensSystem : MonoBehaviour
         {
             Debug.DrawLine(PlayerController.instance.characterModel.transform.position, rayHit.point, Color.red);
             dis = GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, rayHit.point);
-            Debug.Log("Ground Distance = " + dis);
+            //Debug.Log("Ground Distance = " + dis);
             return dis;
         }
         else

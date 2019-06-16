@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool playerDead;
 
+
+
     void Start()
     {
         actualRespawnCoolDown = respawnCoolDown;
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
     //}
     void Update()
     {
+
         if (Input.GetButtonDown("Start") || Input.GetKeyDown(KeyCode.Escape))
         {
             if (pause)
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
         if (pause)
         {
-            Debug.Log("Entering Pause");
+            //Debug.Log("Entering Pause");
             PlayerController.instance.noInput = true;
             if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
             if (Input.GetButtonDown("Back") || Input.GetKeyDown(KeyCode.Q))
@@ -102,7 +105,7 @@ public class GameManager : MonoBehaviour
         {
             if (actualRespawnCoolDown == respawnCoolDown)
             {
-                Debug.Log("Actual respawn == resapwn Cooldown");
+                //Debug.Log("Actual respawn == resapwn Cooldown");
                 PlayerHitFeedbackController.instance.FallHit();
                 //PlayerController.instance.SetCanMove(false);
                 PlayerController.instance.noInput = true;
@@ -121,7 +124,7 @@ public class GameManager : MonoBehaviour
                 else
                 //if (PlayerController.instance.transform.position == levelCheckPoint.transform.position)
                 {
-                    Debug.Log("After death, player on CheckPointPosition: " + levelCheckPoint.transform.position);
+                    //Debug.Log("After death, player on CheckPointPosition: " + levelCheckPoint.transform.position);
                     actualRespawnCoolDown = respawnCoolDown;
                     PlayerController.instance.actualPlayerLive--;
                     PlayerController.instance.deathByFall = false;
@@ -145,7 +148,7 @@ public class GameManager : MonoBehaviour
         ///By DIYNG
         if (playerDead)
         {
-            Debug.Log("Entering Death by Dying");
+            //Debug.Log("Entering Death by Dying");
             PlayerController.instance.noInput = true;
             if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
             if (Input.GetButtonDown("Back") || Input.GetKeyDown(KeyCode.Q))

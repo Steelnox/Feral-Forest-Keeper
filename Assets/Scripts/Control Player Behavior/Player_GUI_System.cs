@@ -54,6 +54,10 @@ public class Player_GUI_System : MonoBehaviour
         SetOnScreenBranchWeaponIcon(false);
         SetOnScreenActivateSanctuaryIcon(false);
         SetOnScreenStrenfthForestIcon(false);
+        SetOnScreenButtonBColor(false);
+        SetOnScreenButtonBSimon(false);
+        SetOnScreenButtonBSkillRunes(false);
+        SetOnScreenButtonBWoodSign(false);
     }
 
     void Update()
