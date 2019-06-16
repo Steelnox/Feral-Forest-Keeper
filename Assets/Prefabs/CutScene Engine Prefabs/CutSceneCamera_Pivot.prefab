@@ -210,14 +210,19 @@ MonoBehaviour:
   scenes:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   actualBehavior: 0
   actualLocalRotation: {x: 0, y: 0, z: 0}
+  rotationSmoothness: 1
   actualFieldOfView: 0
   actualDepthOfField: 0
   actualSpeed: 0
+  depthSmoothness: 1
   actualScene: {fileID: 0}
   actualSceneID: 0
   actualKeyPoint: {fileID: 0}
   actualKeyPointID: 0
   actualMovementTime: 0
   origin: {x: 0, y: 0, z: 0}
+  globalVolume: {fileID: 7718540159855717154}

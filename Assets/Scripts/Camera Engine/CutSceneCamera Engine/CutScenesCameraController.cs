@@ -13,10 +13,12 @@ public class CutScenesCameraController : MonoBehaviour
     public CutSceneCameraBehavior actualBehavior;
 
     public Vector3 actualLocalRotation;
+    public float rotationSmoothness;
     public float actualFieldOfView;
     public float actualDepthOfField;
     public float actualSpeed;
     public float depthSmoothness;
+    
 
     public SceneParameters actualScene;
     public int actualSceneID;
@@ -55,14 +57,25 @@ public class CutScenesCameraController : MonoBehaviour
         switch(actualBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
-                if (actualDepthOfField != actualKeyPoint.depthOfField)
+                ///Set DEPHT OF FIELD
+                if (actualDepthOfField > actualKeyPoint.depthOfField || actualDepthOfField < actualKeyPoint.depthOfField)
                 {
-                    actualDepthOfField = Mathf.Lerp(actualDepthOfField, actualKeyPoint.depthOfField, Time.deltaTime * depthSmoothness);
+                    actualDepthOfField = Mathf.Lerp(actualDepthOfField, actualScene.sceneKeyPoints[actualKeyPointID].depthOfField, Time.deltaTime * depthSmoothness);
                 }
                 else
                 {
                     actualDepthOfField = actualKeyPoint.depthOfField;
                 }
+                ///SET LOCAL ROTATION
+                if (myCamera.transform.localRotation.eulerAngles != actualKeyPoint.localRotation)
+                {
+                    myCamera.transform.localRotation = Quaternion.Lerp(myCamera.transform.localRotation, Quaternion.Euler(actualKeyPoint.localRotation), Time.deltaTime * rotationSmoothness);
+                }
+                else
+                {
+                    myCamera.transform.localRotation = Quaternion.Euler(actualKeyPoint.localRotation);
+                }
+
                 if (GenericSensUtilities.instance.DistanceBetween2Vectors(cameraPivot.transform.position, actualKeyPoint.transform.position) > 0.1f)
                 {
                     //Debug.Log("MovingCamera");
@@ -155,7 +168,7 @@ public class CutScenesCameraController : MonoBehaviour
                     origin = actualKeyPoint.transform.position;
                     actualKeyPointID++;
                     actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
-                    actualDepthOfField = actualKeyPoint.depthOfField;
+                    //actualDepthOfField = actualKeyPoint.depthOfField;
                 }
                 else
                     if (actualScene.sceneKeyPoints[actualKeyPointID].startKey)
