@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.1
-  fullText: Hola
+  fullText: When the lights stop shining, choose the mushrooms wisely. If you fail,
+    be ready to prevail.
   canvas: {fileID: 7476678588287146102}
 --- !u!1 &5963249937592312970
 GameObject:
@@ -166,14 +167,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d6f9c05ff10c4ac45816eb7792896fd8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9118a7dc2685de643bc4050a22435c7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -231,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterScript: {fileID: 962408959887427135}
   canvas: {fileID: 7476678588287146102}
+  appearEvent: event:/GUI n PUZZLES/plop
 --- !u!65 &7027651459489947864
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -263,7 +265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &245354340779722681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -365,14 +367,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3947872240063832125}
     m_Modifications:
-    - target: {fileID: 100000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
-      propertyPath: m_Name
-      value: SignStick
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -424,6 +418,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.99999976
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
+      propertyPath: m_Name
+      value: SignStick
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: c18e91e9f3406ac4a8b44db013039d57, type: 3}
       propertyPath: m_Materials.Array.data[0]

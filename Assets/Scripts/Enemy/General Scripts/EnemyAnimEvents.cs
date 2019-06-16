@@ -20,6 +20,9 @@ public class EnemyAnimEvents : MonoBehaviour
     [FMODUnity.EventRef]
     public string walkEvent;
 
+    [FMODUnity.EventRef]
+    public string criiEvent;
+
     public void Move()
     {
         if (melee_Main != null) melee_Main.move = true;
@@ -72,4 +75,8 @@ public class EnemyAnimEvents : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(walkEvent, transform.position);
     }
 
+    public void criiSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(criiEvent, transform.position);
+    }
 }

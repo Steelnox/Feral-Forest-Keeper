@@ -6,10 +6,11 @@ public class Chase : State
 {
     private Melee melee;
 
+
+
     public override void Enter()
     {
         melee = GetComponent<Melee>();
-
 
         melee.enemy_animator.SetBool("Move", true);
 

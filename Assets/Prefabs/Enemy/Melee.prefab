@@ -18,6 +18,7 @@ MonoBehaviour:
   bounceEvent: event:/E_MELEE/E_Melee_Patrol
   shootEvent: 
   walkEvent: 
+  criiEvent: event:/E_MELEE/E_Melee_Chase
 --- !u!114 &6211158982819334642
 MonoBehaviour:
   m_ObjectHideFlags: 0
