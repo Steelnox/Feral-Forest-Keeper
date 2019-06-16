@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     private Vector3 branchItem_InitLocation;
     private Vector3 swordItem_InitLocation;
 
+    public GameObject gameOver;
+
     [SerializeField]
     private bool deathByFall;
     [SerializeField]
@@ -150,7 +152,8 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Entering Death by Dying");
             PlayerController.instance.noInput = true;
-            if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
+            gameOver.SetActive(true);
+            
             if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.Q))
             {
                 SceneManager.LoadScene("Main Menu");
