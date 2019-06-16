@@ -16,6 +16,8 @@ MonoBehaviour:
   move_Main: {fileID: 0}
   fixed_Main: {fileID: 0}
   bounceEvent: event:/E_MELEE/E_Melee_Patrol
+  shootEvent: 
+  walkEvent: 
 --- !u!114 &6211158982819334642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be748094a7b18d947bbd440822880a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0, z: 0}
+  endPosition: {x: 0, y: 0, z: 0}
   dashLength: 2
 --- !u!114 &6549901792006296825
 MonoBehaviour:
@@ -328,6 +332,11 @@ PrefabInstance:
       propertyPath: melee_enemy
       value: 
       objectReference: {fileID: 6549901792006296828}
+    - target: {fileID: 2820815123431778885, guid: 1642de804a4a6474a97dec90051effd2,
+        type: 3}
+      propertyPath: explosionEvent
+      value: event:/E_MELEE/E_Meele_Explosion
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1642de804a4a6474a97dec90051effd2, type: 3}
 --- !u!1 &2669092272079439688 stripped
@@ -610,15 +619,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5478301780562013057, guid: 28575bf9bf5978545b5b7639f30050d2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8825179959870137649, guid: 28575bf9bf5978545b5b7639f30050d2,
         type: 3}
       propertyPath: camera
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478301780562013057, guid: 28575bf9bf5978545b5b7639f30050d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28575bf9bf5978545b5b7639f30050d2, type: 3}

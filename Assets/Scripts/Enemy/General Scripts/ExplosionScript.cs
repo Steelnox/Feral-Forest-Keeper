@@ -11,7 +11,9 @@ public class ExplosionScript : MonoBehaviour
     private float timer;
 
     public GameObject melee_enemy;
-    
+
+    [FMODUnity.EventRef]
+    public string explosionEvent;
 
     void Start()
     {
@@ -19,6 +21,9 @@ public class ExplosionScript : MonoBehaviour
         dmg_done = false;
 
         timer = 0;
+
+        FMODUnity.RuntimeManager.PlayOneShot(explosionEvent, transform.position);
+
     }
 
     private void Update()
