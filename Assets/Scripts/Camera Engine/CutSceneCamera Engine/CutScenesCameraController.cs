@@ -43,6 +43,7 @@ public class CutScenesCameraController : MonoBehaviour
                 {
                     Debug.Log("MovingCamera");
                     MoveCamera(origin, actualKeyPoint.transform.position, actualKeyPoint.speed);
+                    //myCamera.transform.localEulerAngles = Vector3.Lerp(myCamera.transform.localEulerAngles, actualKeyPoint.localRotation, Time.deltaTime * 5);
                 }
                 else
                 {
@@ -50,22 +51,21 @@ public class CutScenesCameraController : MonoBehaviour
                 }
                 break;
             case CutSceneCameraBehavior.CHANGE_KEY:
-                if (actualScene.sceneKeyPoints[actualKeyPointID].endKey)
+                if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1)
                 {
-                    ChangeBehavior(CutSceneCameraBehavior.CHANGE_SCENE);
+                    actualKeyPointID++;
+                    actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+                    ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
                 }
                 else
+                if (actualKeyPointID >= actualScene.sceneKeyPoints.Length)
                 {
-                    if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1)
-                    {
-                        actualKeyPointID++;
-                        actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
-                    }
-                    ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
+                    ChangeBehavior(CutSceneCameraBehavior.CHANGE_SCENE);
                 }
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
                 ChangeScene();
+                ChangeBehavior(CutSceneCameraBehavior.MOVE_BETWEEN_KEYS);
                 break;
         }
     }
@@ -73,37 +73,62 @@ public class CutScenesCameraController : MonoBehaviour
     {
         if (actualSceneID < scenes.Length - 1)
         {
-            actualScene = scenes[actualSceneID + 1];
             actualSceneID++;
         }
         else
         {
             actualSceneID = 0;
-            actualScene = scenes[actualSceneID];
         }
-
+        actualScene = scenes[actualSceneID];
         actualKeyPointID = 0;
+        actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
     }
+    //private void NextKeyPoint()
+    //{
+    //    if (actualKeyPointID < actualScene.sceneKeyPoints.Length - 1)
+    //    {
+    //        actualKeyPointID++;
+    //        actualKeyPoint = actualScene.sceneKeyPoints[actualKeyPointID];
+    //    }
+    //}
     private void ChangeBehavior(CutSceneCameraBehavior newBehavior)
     {
         switch (actualBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
+                
+                break;
+            case CutSceneCameraBehavior.CHANGE_KEY:
+                
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
+                //cameraPivot.transform.position = actualScene.sceneKeyPoints[actualKeyPointID].transform.position;
                 break;
         }
         switch (newBehavior)
         {
             case CutSceneCameraBehavior.MOVE_BETWEEN_KEYS:
-                origin = this.transform.position;
+                if (actualScene.sceneKeyPoints[actualKeyPointID].endKey)
+                {
+                    ChangeBehavior(CutSceneCameraBehavior.CHANGE_SCENE);
+                }
+                else
+                if (actualScene.sceneKeyPoints[actualKeyPointID].startKey)
+                {
+                    origin = cameraPivot.transform.position;
+                }
+
+                break;
+            case CutSceneCameraBehavior.CHANGE_KEY:
+                
                 break;
             case CutSceneCameraBehavior.CHANGE_SCENE:
-                if (actualSceneID == scenes.Length - 1)
-                {
-                    actualSceneID = -1;
-                }
-                cameraPivot.transform.position = actualScene.sceneKeyPoints[0].transform.position;
+                //if (actualSceneID >= scenes.Length - 1)
+                //{
+                //    actualSceneID = -1;
+                //    actualScene = scenes[actualSceneID];
+                //}
+                
                 break;
         }
         actualBehavior = newBehavior;

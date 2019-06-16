@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114086285455537252}
-  - {fileID: 114921372885848490}
+  - {fileID: 114902066192867794}
+  - {fileID: 114229812064387662}
   EditorEvents:
   - {fileID: 114251566603423930}
   - {fileID: 114043968614637988}
@@ -64,10 +64,10 @@ MonoBehaviour:
   - {fileID: 114739299028361208}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   StringsBanks:
-  - {fileID: 114086285455537252}
-  stringsBankWriteTime: 636962630325910150
+  - {fileID: 114902066192867794}
+  stringsBankWriteTime: 636960554001395932
   cacheVersion: 3
 --- !u!114 &114001866934749554
 MonoBehaviour:
@@ -337,7 +337,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_CutBush
   guid: 8517d2253fb8db49a5888313c607f408
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -360,7 +360,7 @@ MonoBehaviour:
   Path: event:/DOOR/DoorClose
   guid: 61e2806c402e8549998a7dd67cb9ec9e
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -521,7 +521,7 @@ MonoBehaviour:
   Path: event:/E_MELEE/E_Meele_Die
   guid: 8a595840c291374cbdcda84d21d3ae5a
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -567,7 +567,7 @@ MonoBehaviour:
   Path: event:/AMBIENT/A_Birds
   guid: 0ecdb4ce7def4140a0e74ccf8c13c9cb
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -659,7 +659,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_PushRock2
   guid: 024aa281d73620428b760d4048869fca
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1644,14 +1644,14 @@ MonoBehaviour:
   Path: event:/ROCKS/pushRock
   guid: c32ec505c34884449ff5a28e4550df08
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1000
+  Length: 13226
 --- !u!114 &114114382185138888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   Path: event:/FERAL/Ch_GetHit2
   guid: bcdd81389261f64b8cbe4ddc88ac9be3
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2355,7 +2355,7 @@ MonoBehaviour:
   Path: event:/E_DISTANCE/E_Distance_Hitwood
   guid: 63a313c6a40ee64c9aacc9c3272372b9
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2677,7 +2677,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/GUI_song2D
   guid: b0c66068814b254fbaccaf88f7338c0d
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2723,7 +2723,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/Color_Correct
   guid: ca2047b504d48045bbb32176ca3a46ed
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2836,7 +2836,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/plop2
   guid: cf4169ecd929104ea49f82405010f91f
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2936,6 +2936,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1113
+--- !u!114 &114229812064387662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
+    FMOD project\Build\Desktop\Master.bank
+  SubDir: 
+  lastModified: 636960554001290763
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 3910208
+  Exists: 1
 --- !u!114 &114229894084235848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2997,14 +3018,14 @@ MonoBehaviour:
   Path: event:/DASH/dash
   guid: 2eb46d2fa049c343a1d93da06785fa27
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 877
+  Length: 1000
 --- !u!114 &114233808822386072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3089,7 +3110,7 @@ MonoBehaviour:
   Path: event:/E_MELEE/E_Melee_Attack
   guid: 7ad8cc7ea7c9bc43b65a2b7f1f462241
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3317,7 +3338,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_PushLog
   guid: 0071a1c9a1b20349ae71753b14b939f5
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3340,7 +3361,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/GUI_song
   guid: 4bbc5103f4853946a49ef8bdf8ac6743
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -3614,7 +3635,7 @@ MonoBehaviour:
   Path: event:/DOOR/Door_Open
   guid: 5eded06f2b600442b7de77ba185f6232
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3637,7 +3658,7 @@ MonoBehaviour:
   Path: event:/FERAL/attack2
   guid: 1e33b2158b058149a5777ac82697ef48
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4302,7 +4323,7 @@ MonoBehaviour:
   Path: event:/E_DISTANCE/E_Distance_Hit_2
   guid: 1a777e4dc039f049b384195a6600ef92
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4438,14 +4459,14 @@ MonoBehaviour:
   Path: event:/FERAL/Run
   guid: 8130296cd045694ca9425dbca1ecaf6b
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 150
+  Length: 2937
 --- !u!114 &114342302515574304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4829,7 +4850,7 @@ MonoBehaviour:
   Path: event:/AMBIENT/A_Leaves
   guid: 65f0d9cf93a4514b8c2e6981c3ff67bb
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -5013,7 +5034,7 @@ MonoBehaviour:
   Path: event:/E_DISTANCE/E_Distance_Patrol (walk)
   guid: 14a990299ba9cb45b1a1685e42878927
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5632,7 +5653,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_WalkThroughLongGrass
   guid: 3d0b2ef384873042a88cff1867e1664a
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5908,7 +5929,7 @@ MonoBehaviour:
   Path: event:/AMBIENT/A_Wind
   guid: 0824f50f0050af4ba251f9f4673bcf55
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -6224,7 +6245,7 @@ MonoBehaviour:
   Path: event:/E_DISTANCE/E-distance_patrol (run)
   guid: b08a2fe45276d145ba19f612dcbecb63
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6339,7 +6360,7 @@ MonoBehaviour:
   Path: event:/FERAL/Ch_PickKey
   guid: 074c3afb1fab4040b76e716cd0ac54c6
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6523,7 +6544,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/W_SuccessfulAtion
   guid: 925d15a2601ba44b9e7834d0e66437a2
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -7711,7 +7732,7 @@ MonoBehaviour:
   Path: event:/E_DISTANCE/E_Distance_Die
   guid: 77e1808ddd0e7f4587ebf5abb30467c2
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8077,7 +8098,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/-_-
   guid: c16009531dfe114883eb8718db677d53
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8192,7 +8213,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_Push_Rock
   guid: 53d53a1797dabe43b80b4af8096e076b
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8305,7 +8326,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/GUI_select
   guid: 5acc598b8aa6124b9ece5a168fa375ac
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8420,7 +8441,7 @@ MonoBehaviour:
   Path: event:/E_MELEE/E_Melee_Patrol
   guid: f4201bc80b7a254ab83a20ad5463bd19
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8443,7 +8464,7 @@ MonoBehaviour:
   Path: event:/E_MELEE/E_Melee_Hit
   guid: 7505222608a59d4e96a92ed7fd174457
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8512,7 +8533,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_CollideWithBush
   guid: 8d379b739f00e64081d9fe0b537aa940
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8832,7 +8853,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/Change_Color
   guid: d6952e8550f5dc429f628e71fa383a18
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8901,7 +8922,7 @@ MonoBehaviour:
   Path: event:/FERAL/Ch_Die_normal
   guid: 8e494259ab93dd47abbeea6d64d615ce
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -8993,7 +9014,7 @@ MonoBehaviour:
   Path: event:/FERAL/Ch_Die_falling
   guid: bb8b8da1ac17bd4a920498bf0bd031a6
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -9681,7 +9702,7 @@ MonoBehaviour:
   Path: event:/SWITCH/(switch) door_open
   guid: 3b9f916540465440b22fb9f26ca892c9
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -10658,7 +10679,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/plop
   guid: fe4773ba5768df49b066aa5d6c3c13fd
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -11254,7 +11275,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/W_SuccssesfulAction Flauta
   guid: f3feac83ad98914db5ad6bc3a05b4716
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -11827,7 +11848,7 @@ MonoBehaviour:
   Path: event:/AMBIENT/A_DistantWater
   guid: e67bd5bb05152c4fae43f1ce20bb69f7
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -12034,7 +12055,7 @@ MonoBehaviour:
   Path: event:/FERAL/attack
   guid: 387fd627b6d330408bf251538363e5c4
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -12400,7 +12421,7 @@ MonoBehaviour:
   Path: event:/E_DISTANCE/E_Distance_Atack
   guid: dbf15ec6e5266b42b9eff65a6b149f21
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -12933,6 +12954,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 110
+--- !u!114 &114902066192867794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
+    FMOD project\Build\Desktop\Master.strings.bank
+  SubDir: 
+  lastModified: 636960554001395932
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 2890
+  Exists: 1
 --- !u!114 &114902818330549980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13335,7 +13377,7 @@ MonoBehaviour:
   Path: event:/FERAL/pickHealth
   guid: c4d9e5d8f287164eb794b57ca3923de1
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -13402,7 +13444,7 @@ MonoBehaviour:
   Path: event:/WORLD/W_CANT cut bush
   guid: f025cdf06b1b4d4589abf6b841107703
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -13563,7 +13605,7 @@ MonoBehaviour:
   Path: event:/GUI n PUZZLES/puzzle ()
   guid: b6e405013bc06b4b9b55b2bbc0c227a2
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -14182,7 +14224,7 @@ MonoBehaviour:
   Path: event:/WORLD/WalkThroughGrass
   guid: f138f1f4e506134ea29cebe716255ed2
   Banks:
-  - {fileID: 114921372885848490}
+  - {fileID: 114229812064387662}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1

@@ -43,7 +43,7 @@ public class Player_TargetCamera_Offset_Controller : MonoBehaviour
             {
                 case TargetCamera_Offset_State.STANDARD:
                     if (PlayerController.instance.deathByFall) ChangeState(TargetCamera_Offset_State.PLAYER_DEATH);
-                    if (PlayerSensSystem.instance.nearestEnemy != null && PlayerSensSystem.instance.nearestEnemy.chasing && GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestEnemy.transform.position, PlayerController.instance.transform.position) < combatDistance)
+                    if (PlayerSensSystem.instance.nearestEnemy != null && PlayerSensSystem.instance.nearestEnemy.chasing && GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestEnemy.transform.position, PlayerController.instance.transform.position) < combatDistance && PlayerController.instance.playerAlive)
                     {
                         ChangeState(TargetCamera_Offset_State.COMBAT);
                     }
@@ -117,7 +117,7 @@ public class Player_TargetCamera_Offset_Controller : MonoBehaviour
                     break;
                 case TargetCamera_Offset_State.COMBAT:
                     if (PlayerController.instance.deathByFall) ChangeState(TargetCamera_Offset_State.PLAYER_DEATH);
-                    if (PlayerSensSystem.instance.nearestEnemy == null || !PlayerSensSystem.instance.nearestEnemy.chasing || GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestEnemy.transform.position, PlayerController.instance.transform.position) > combatDistance)
+                    if (PlayerSensSystem.instance.nearestEnemy == null || !PlayerSensSystem.instance.nearestEnemy.chasing || GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestEnemy.transform.position, PlayerController.instance.transform.position) > combatDistance || !PlayerController.instance.playerAlive)
                     {
                         ChangeState(TargetCamera_Offset_State.STANDARD);
                     }
@@ -138,7 +138,7 @@ public class Player_TargetCamera_Offset_Controller : MonoBehaviour
         }
         else
         {
-            transform.position = PlayerController.instance.transform.position + CameraController.instance.cameraOffSet;
+            transform.position = PlayerController.instance.transform.position + (CameraController.instance.cameraOffSet.normalized * CameraController.instance.cameraDistance);
         }
     }
     public void ChangeState(TargetCamera_Offset_State newState)

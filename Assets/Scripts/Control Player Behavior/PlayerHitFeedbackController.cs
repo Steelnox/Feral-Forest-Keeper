@@ -26,6 +26,8 @@ public class PlayerHitFeedbackController : MonoBehaviour
     [SerializeField]
     private Vignette vignette;
     [SerializeField]
+    private DepthOfField depthOfField;
+    [SerializeField]
     private bool fallHit;
     [SerializeField]
     private ColorGrading colorGrading;
@@ -42,6 +44,7 @@ public class PlayerHitFeedbackController : MonoBehaviour
         {
             globalVolume.profile.TryGetSettings(out vignette);
             globalVolume.profile.TryGetSettings(out colorGrading);
+            globalVolume.profile.TryGetSettings(out depthOfField);
         }
         if (colorGrading != null)
         {
@@ -49,20 +52,6 @@ public class PlayerHitFeedbackController : MonoBehaviour
         }
         curveValue = 0;
     }
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    fallHit = false;
-    //    if (globalVolume != null)
-    //    {
-    //        globalVolume.profile.TryGetSettings(out vignette);
-    //        globalVolume.profile.TryGetSettings(out colorGrading);
-    //    }
-    //    if (colorGrading != null)
-    //    {
-    //        initialPostExposureValue = colorGrading.postExposure.value;
-    //    }
-    //    curveValue = 0;
-    //}
     void Update()
     {
         if (vignette != null)
@@ -125,5 +114,13 @@ public class PlayerHitFeedbackController : MonoBehaviour
         Hit();
         fallHit = true;
         fadeInFallDeathCurveTime.postWrapMode = WrapMode.ClampForever;
+    }
+    public void SetDepthOfView(float depth)
+    {
+        depthOfField.focusDistance.value = depth;
+    }
+    public float GetActualDepthOfView()
+    {
+        return depthOfField.focusDistance.value;
     }
 }

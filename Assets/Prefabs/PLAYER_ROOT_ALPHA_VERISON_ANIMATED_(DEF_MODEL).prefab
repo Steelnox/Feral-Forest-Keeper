@@ -364,12 +364,13 @@ MonoBehaviour:
   pushLogState: {fileID: 2932923199281571903}
   dashState: {fileID: 1821888145164792668}
   showingWeaponState: {fileID: 5593225622891879730}
+  deathState: {fileID: 2690515291338696802}
   meleeWeaponRoot: {fileID: 980944915}
   weaponCollider: {fileID: 316019337}
   playerLive: 6
   dashCharges: 1
-  dashCooldownTime: 2
-  dashCooldownSmoothRecover: 2
+  dashCooldownTime: 1.5
+  dashCooldownSmoothRecover: 1
   movementSpeed: 3
   movementLockTargetSpeed: 1
   bushMovementSpeed: 1
@@ -399,7 +400,7 @@ MonoBehaviour:
   noInput: 0
   no_X_Input: 0
   no_Y_Input: 0
-  startWithAllSkills: 0
+  startWithAllSkills: 1
   playerAlive: 0
   pushing: 0
   falling: 0
@@ -478,6 +479,7 @@ MonoBehaviour:
   pushingMovement: {x: 0, y: 0, z: 0}
   constactDistance: 0
   actualContactDistance: 0
+  pushDir: event:/ROCKS/pushRock
 --- !u!114 &1821888145164792668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +498,7 @@ MonoBehaviour:
   dashSmooth: 10
   dashTime: 0.2
   dashLenght: 1.8
+  dashEvent: event:/DASH/dash
 --- !u!114 &3969747817854841181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +652,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   vignetteFactor: 0
   vignette: {fileID: 0}
+  depthOfField: {fileID: 0}
   fallHit: 0
   colorGrading: {fileID: 0}
   evaluateTime: 0
@@ -785,6 +789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e61ec822c285946bbb405c1b07808e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkEvent: event:/FERAL/Run
+  attackEvent: event:/FERAL/attack
+  fallingEvent: event:/FERAL/Ch_Die_falling
 --- !u!114 &1778750443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,11 +1271,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3684134845202602334}
     m_Modifications:
-    - target: {fileID: 6546965058698378218, guid: e6534e9fdac3e6d46b2fb380d113bbe3,
-        type: 3}
-      propertyPath: m_Name
-      value: Projector
-      objectReference: {fileID: 0}
     - target: {fileID: 6546965058698378217, guid: e6534e9fdac3e6d46b2fb380d113bbe3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1324,6 +1326,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6546965058698378218, guid: e6534e9fdac3e6d46b2fb380d113bbe3,
+        type: 3}
+      propertyPath: m_Name
+      value: Projector
+      objectReference: {fileID: 0}
     - target: {fileID: 6546965058698378216, guid: e6534e9fdac3e6d46b2fb380d113bbe3,
         type: 3}
       propertyPath: m_NearClipPlane
@@ -1373,6 +1380,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Feral_Model_Animated_DEFENITIVE
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: ab71c152d18af884d93e4329ca13d0c0, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ffed59e88c0a1d74290f3502b9d32351, type: 2}
     - target: {fileID: 400036, guid: ab71c152d18af884d93e4329ca13d0c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1417,10 +1428,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: ab71c152d18af884d93e4329ca13d0c0, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: ffed59e88c0a1d74290f3502b9d32351, type: 2}
     - target: {fileID: 400040, guid: ab71c152d18af884d93e4329ca13d0c0, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.0009216132
@@ -1826,10 +1833,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6667978497725960601}
     m_Modifications:
-    - target: {fileID: 1210710497437190, guid: 8336ffec17a2e134ca47e3a67a0613ab, type: 3}
-      propertyPath: m_Name
-      value: AttackParticles
-      objectReference: {fileID: 0}
     - target: {fileID: 96648479012581830, guid: 8336ffec17a2e134ca47e3a67a0613ab,
         type: 3}
       propertyPath: m_Time
@@ -1869,6 +1872,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MinVertexDistance
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210710497437190, guid: 8336ffec17a2e134ca47e3a67a0613ab, type: 3}
+      propertyPath: m_Name
+      value: AttackParticles
       objectReference: {fileID: 0}
     - target: {fileID: 4889028055671192, guid: 8336ffec17a2e134ca47e3a67a0613ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1946,11 +1953,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon_Branch
       objectReference: {fileID: 0}
-    - target: {fileID: 8385089848936200556, guid: 1374826f5be4d7746b5e72e5c526e5b7,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1636f8ad3d89041449a3352a94257607, type: 2}
     - target: {fileID: 8385089848938494860, guid: 1374826f5be4d7746b5e72e5c526e5b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2021,6 +2023,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: -2
       objectReference: {fileID: 0}
+    - target: {fileID: 8385089848936200556, guid: 1374826f5be4d7746b5e72e5c526e5b7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1636f8ad3d89041449a3352a94257607, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1374826f5be4d7746b5e72e5c526e5b7, type: 3}
 --- !u!1 &2142698982381176607 stripped

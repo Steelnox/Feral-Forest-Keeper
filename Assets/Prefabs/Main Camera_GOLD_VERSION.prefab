@@ -257,9 +257,11 @@ MonoBehaviour:
   largeFOV: 70
   initCameraRotation: {x: 0, y: 0, z: 0, w: 0}
   scriptedCooldownTime: 4
+  cameraDistance: 6
   actualBehavior: 0
   scriptedTarget: {fileID: 0}
   scriptedHighDistance: 0
+  standardFieldOfView: 3
 --- !u!114 &4367583827182339146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,11 +373,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7383745383864470088}
     m_Modifications:
-    - target: {fileID: 2516344795388923023, guid: 6eff1c99a84085a43a3e77e1a24b1561,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 2516344795388923120, guid: 6eff1c99a84085a43a3e77e1a24b1561,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -479,6 +476,31 @@ PrefabInstance:
     - target: {fileID: 2516344795388923120, guid: 6eff1c99a84085a43a3e77e1a24b1561,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516344795388923023, guid: 6eff1c99a84085a43a3e77e1a24b1561,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516344794098682070, guid: 6eff1c99a84085a43a3e77e1a24b1561,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516344794701403121, guid: 6eff1c99a84085a43a3e77e1a24b1561,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516344795172084275, guid: 6eff1c99a84085a43a3e77e1a24b1561,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516344795703524097, guid: 6eff1c99a84085a43a3e77e1a24b1561,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

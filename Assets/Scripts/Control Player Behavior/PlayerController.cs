@@ -90,15 +90,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 showingDirection;
     public bool flyingDashFinished;
     private float checkDistanceOffset;
-
-    [FMODUnity.EventRef]
-    public string damageEvent;
-    [FMODUnity.EventRef]
-    public string dieEvent;
-    [FMODUnity.EventRef]
-    public string pickHealthEvent;
-    [FMODUnity.EventRef]
-    public string pickKeyEvent;
+    private float dashTime;
 
     protected StateMachine p_StateMachine = new StateMachine();
 
@@ -121,6 +113,7 @@ public class PlayerController : MonoBehaviour
         showingWeapon = false;
         flyingDashFinished = false;
         checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
+        dashTime = 0;
     }
     //private void OnLevelWasLoaded(int level)
     //{
@@ -180,13 +173,17 @@ public class PlayerController : MonoBehaviour
             MovingInSlowZone(false);
         }
 
-        if (actualPlayerLive == 0)
-        {
-            if (playerAlive != false) playerAlive = false;
-        }
+        //if (actualPlayerLive == 0)
+        //{
+            
+        //}
         if (actualPlayerLive > 0)
         {
             if (playerAlive != true) playerAlive = true;
+        }
+        else
+        {
+            if (playerAlive != false) playerAlive = false;
         }
         //if (showingWeapon)
         //{
@@ -270,8 +267,6 @@ public class PlayerController : MonoBehaviour
                         Player_GUI_System.instance.SetOnScreenPickUpIcon(true);
                         if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.F))
                         {
-                            FMODUnity.RuntimeManager.PlayOneShot(pickKeyEvent, transform.position);
-
                             PlayerManager.instance.AddItemToInventary(PlayerSensSystem.instance.nearestItem);
                             PlayerSensSystem.instance.nearestItem.CollectItem();
                             PlayerManager.instance.CountKeys();
@@ -280,8 +275,6 @@ public class PlayerController : MonoBehaviour
                         break;
                     case Item.ItemType.LIVE_UP:
                         PlayerSensSystem.instance.nearestItem.CollectItem();
-                        FMODUnity.RuntimeManager.PlayOneShot(pickHealthEvent, transform.position);
-
                         if (actualPlayerLive < playerLive && actualPlayerLive > 0 && !deathByFall)
                         {
                             actualPlayerLive++;
@@ -566,11 +559,17 @@ public class PlayerController : MonoBehaviour
     {
         if (dashCooldown < dashCooldownTime * 0.97f)
         {
-            dashCooldown = Mathf.Lerp(dashCooldown, dashCooldownTime, dashCooldownSmoothRecover * Time.deltaTime);
+            dashTime += Time.deltaTime;
+            float evaluateTime = dashTime / dashCooldownTime;
+            dashCooldown = Mathf.Lerp(0, dashCooldownTime, evaluateTime);
         }
         else
         {
-            if (dashCooldown != dashCooldownTime) dashCooldown = dashCooldownTime;
+            if (dashCooldown != dashCooldownTime)
+            {
+                dashTime = 0;
+                dashCooldown = dashCooldownTime;
+            }
         }
     }
     public void CheckInputs()
@@ -625,17 +624,12 @@ public class PlayerController : MonoBehaviour
                 if (GenericSensUtilities.instance.DistanceBetween2Vectors(gate.transform.position, transform.position) < 1.0f) gate.UseGate();
             }
         }
-        //if (other.tag == "DeathZone" && playerAlive)
-        //{
-        //    if (playerAlive)
-        //    actualPlayerLive = 0;
-        //}
         StaticCameraZone scz = other.gameObject.GetComponent<StaticCameraZone>();
         if (scz != null && CameraController.instance.GetActualBehavior() != CameraController.Behavior.SCRIPT_MOVEMENT)
         {
             if (CameraController.instance.GetActualBehavior() != CameraController.Behavior.STATIC_CAMERA_ZONE)
             {
-                CameraController.instance.StaticCameraZone(scz.cameraTarget, scz.cameraDistance);
+                CameraController.instance.StaticCameraZone(scz.cameraTarget, scz.cameraDistance, scz.dephtOfFieldDIstance);
             }
         }
     }
@@ -676,15 +670,11 @@ public class PlayerController : MonoBehaviour
         {
             if (actualPlayerLive > 0)
             {
-                FMODUnity.RuntimeManager.PlayOneShot(damageEvent, transform.position);
-
                 actualPlayerLive -= damage;
                 gettingHit = true;
             }
             else
             {
-                FMODUnity.RuntimeManager.PlayOneShot(dieEvent, transform.position);
-
                 GameManager.instance.PlayerDead();
             }
         }

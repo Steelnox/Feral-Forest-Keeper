@@ -24,6 +24,7 @@ public class CameraController : MonoBehaviour
     public float largeFOV;
     public Quaternion initCameraRotation;
     public float scriptedCooldownTime;
+    public float cameraDistance;
 
     public enum Behavior {FOLLOW_PLAYER, CHANGE_LEVEL, SCRIPT_MOVEMENT, PLAYER_DEATH, STATIC_CAMERA_ZONE, TRANSITION_TO_FOLLOW, PLAYER_SHOW_WEAPON};
     [SerializeField]
@@ -44,10 +45,13 @@ public class CameraController : MonoBehaviour
     private Vector3 endPosition;
     private float time;
     private float blendTime;
+    private float actualDephOfField;
+    public float standardFieldOfView;
+    private float scriptedFieldOfView;
     
     void Start ()
     {
-        desiredPosition = target.transform.position + cameraOffSet;
+        desiredPosition = target.transform.position + cameraOffSet.normalized * cameraDistance;
         transform.position = desiredPosition;
         SetActualBehavior(Behavior.FOLLOW_PLAYER);
         initCameraRotation = p_Camera.transform.rotation;
@@ -69,68 +73,89 @@ public class CameraController : MonoBehaviour
     //}
     void Update ()
     {
-        switch (actualBehavior)
+        if (PlayerController.instance.playerAlive)
         {
-            case Behavior.FOLLOW_PLAYER:
-                //FaceTarget();
-                FollowTarget(target);
-                break;
-            case Behavior.CHANGE_LEVEL:
-                desiredPosition = target.transform.position + cameraOffSet;
-                cameraMovement = Vector3.Slerp(cameraMovement, desiredPosition, (smoothValue / 2) * Time.deltaTime);
-                p_Camera.transform.position = cameraMovement;
-                //Debug.Log("Camera Movement = " + cameraMovement);
-                //Debug.Log("Desired Position = " + desiredPosition);
-                if ((cameraMovement - desiredPosition).magnitude < 0.2f) SetActualBehavior(Behavior.FOLLOW_PLAYER);
-                break;
-            case Behavior.SCRIPT_MOVEMENT:
-                actualScriptedCooldown -= Time.deltaTime;
-                if (actualScriptedCooldown <= 0)
-                {
-                    PlayerController.instance.noInput = true;
-                    actualScriptedCooldown = scriptedCooldownTime;
-                    SetActualBehavior(Behavior.FOLLOW_PLAYER);
+            switch (actualBehavior)
+            {
+                case Behavior.FOLLOW_PLAYER:
+                    //FaceTarget();
+                    FollowTarget(target);
+                    if (actualDephOfField != standardFieldOfView)
+                    {
+                        actualDephOfField = Mathf.Lerp(actualDephOfField, standardFieldOfView, Time.deltaTime * 3.0f);
+                    }
+                    else
+                    {
+                        actualDephOfField = standardFieldOfView;
+                    }
                     break;
-                }
-                PlayerController.instance.noInput = false;
-                PlayerController.instance.ChangeState(PlayerController.instance.movementState);
-                FollowTarget(scriptedTarget);
-                break;
-            case Behavior.PLAYER_DEATH:
-                //deathCount += Time.deltaTime;
-                time += Time.deltaTime;
-                blendTime = time / GameManager.instance.respawnCoolDown;
-                endPosition = startPosition + (frontBackTravellingSliderVector * 0.5f);
-                //transform.position = Vector3.Lerp(startPosition, endPosition + (-frontBackTravellingSliderVector * (-deathCount * 0.5f)), Time.deltaTime);
-                p_Camera.transform.position = Vector3.Lerp(startPosition, endPosition, time);
-                break;
-            case Behavior.STATIC_CAMERA_ZONE:
-                time += Time.deltaTime;
-                blendTime = time / 1.0f;
-                //transform.position = Vector3.Lerp(startPosition, endPosition, Time.time * smoothValue / 2);
-                transform.position = Vector3.Lerp(startPosition, endPosition, time);
-                break;
-            case Behavior.TRANSITION_TO_FOLLOW:
-                //Debug.Log("Distance Between Camera and Target = " + GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet, p_Camera.transform.position));
-                if (GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet, p_Camera.transform.position) < 0.1f)
-                {
-                    SetActualBehavior(Behavior.FOLLOW_PLAYER);
-                }
-                else
-                {
-                    p_Camera.transform.position = Vector3.Lerp(p_Camera.transform.position, target.transform.position + cameraOffSet, Time.deltaTime * smoothValue / 2);
-                }
-                break;
-            case Behavior.PLAYER_SHOW_WEAPON:
-                //FollowTarget(PlayerController.instance.gameObject);
-                time += Time.deltaTime;
-                blendTime = time / 0.5f;
-                blendTime = Mathf.Clamp(blendTime, 0, 1);
-                transform.position = Vector3.Lerp(startPosition, endPosition, blendTime);
-                break;
-            default:
-                break;
+                case Behavior.CHANGE_LEVEL:
+                    desiredPosition = target.transform.position + cameraOffSet.normalized * cameraDistance;
+                    cameraMovement = Vector3.Slerp(cameraMovement, desiredPosition, (smoothValue / 2) * Time.deltaTime);
+                    p_Camera.transform.position = cameraMovement;
+                    //Debug.Log("Camera Movement = " + cameraMovement);
+                    //Debug.Log("Desired Position = " + desiredPosition);
+                    if ((cameraMovement - desiredPosition).magnitude < 0.2f) SetActualBehavior(Behavior.FOLLOW_PLAYER);
+                    break;
+                case Behavior.SCRIPT_MOVEMENT:
+                    actualScriptedCooldown -= Time.deltaTime;
+                    if (actualScriptedCooldown <= 0)
+                    {
+                        PlayerController.instance.noInput = true;
+                        actualScriptedCooldown = scriptedCooldownTime;
+                        SetActualBehavior(Behavior.FOLLOW_PLAYER);
+                        break;
+                    }
+                    PlayerController.instance.noInput = false;
+                    PlayerController.instance.ChangeState(PlayerController.instance.movementState);
+                    FollowTarget(scriptedTarget);
+                    break;
+                case Behavior.PLAYER_DEATH:
+                    //deathCount += Time.deltaTime;
+                    time += Time.deltaTime;
+                    blendTime = time / GameManager.instance.respawnCoolDown;
+                    endPosition = startPosition + (frontBackTravellingSliderVector * 0.5f);
+                    //transform.position = Vector3.Lerp(startPosition, endPosition + (-frontBackTravellingSliderVector * (-deathCount * 0.5f)), Time.deltaTime);
+                    p_Camera.transform.position = Vector3.Lerp(startPosition, endPosition, time);
+                    break;
+                case Behavior.STATIC_CAMERA_ZONE:
+                    time += Time.deltaTime;
+                    blendTime = time / 1.0f;
+                    //transform.position = Vector3.Lerp(startPosition, endPosition, Time.time * smoothValue / 2);
+                    transform.position = Vector3.Lerp(startPosition, endPosition, time);
+                    if (actualDephOfField != scriptedFieldOfView)
+                    {
+                        actualDephOfField = Mathf.Lerp(actualDephOfField, scriptedFieldOfView, Time.deltaTime * 3.0f);
+                    }
+                    else
+                    {
+                        actualDephOfField = scriptedFieldOfView;
+                    }
+                    break;
+                case Behavior.TRANSITION_TO_FOLLOW:
+                    //Debug.Log("Distance Between Camera and Target = " + GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet, p_Camera.transform.position));
+                    if (GenericSensUtilities.instance.DistanceBetween2Vectors(target.transform.position + cameraOffSet.normalized * cameraDistance, p_Camera.transform.position) < 0.1f)
+                    {
+                        SetActualBehavior(Behavior.FOLLOW_PLAYER);
+                    }
+                    else
+                    {
+                        p_Camera.transform.position = Vector3.Lerp(p_Camera.transform.position, target.transform.position + cameraOffSet.normalized * cameraDistance, Time.deltaTime * smoothValue / 2);
+                    }
+                    break;
+                case Behavior.PLAYER_SHOW_WEAPON:
+                    //FollowTarget(PlayerController.instance.gameObject);
+                    time += Time.deltaTime;
+                    blendTime = time / 0.5f;
+                    blendTime = Mathf.Clamp(blendTime, 0, 1);
+                    transform.position = Vector3.Lerp(startPosition, endPosition, blendTime);
+                    break;
+                default:
+                    break;
+            }
         }
+       
+        PlayerHitFeedbackController.instance.SetDepthOfView(actualDephOfField);
 	}
     public void FaceTarget(Vector3 _target)
     {
@@ -140,7 +165,7 @@ public class CameraController : MonoBehaviour
     }
     void FollowTarget(GameObject _target)
     {
-        desiredPosition = _target.transform.position + cameraOffSet;
+        desiredPosition = _target.transform.position + cameraOffSet.normalized * cameraDistance;
         desiredPosition2D.x = desiredPosition.x;
         desiredPosition2D.y = desiredPosition.z;
 
@@ -160,10 +185,11 @@ public class CameraController : MonoBehaviour
         scriptedTarget = tempTarget;
         SetActualBehavior(Behavior.SCRIPT_MOVEMENT);
     }
-    public void StaticCameraZone(GameObject tempTarget, float highDistance)
+    public void StaticCameraZone(GameObject tempTarget, float highDistance, float depth)
     {
         scriptedTarget = tempTarget;
         scriptedHighDistance = highDistance;
+        scriptedFieldOfView = depth;
         SetActualBehavior(Behavior.STATIC_CAMERA_ZONE);
     }
 
@@ -179,7 +205,7 @@ public class CameraController : MonoBehaviour
     {
         Vector3 mov3D;
         mov3D.x = movVect.x;
-        mov3D.y = target.transform.position.y + cameraOffSet.y;
+        mov3D.y = target.transform.position.y + (cameraOffSet.normalized * cameraDistance).y;
         mov3D.z = movVect.y;
 
         return mov3D;
@@ -189,7 +215,6 @@ public class CameraController : MonoBehaviour
     {
         p_Camera.fieldOfView = Mathf.Lerp(p_Camera.fieldOfView, nFOV, _smooth * Time.deltaTime);
     }
-
     bool FollowTargetWithinLevelBorders()
     {
         Vector3 UP_MIDDLE_NearPlanePoint = new Vector3(0.5f, 1, p_Camera.nearClipPlane);
@@ -442,7 +467,7 @@ public class CameraController : MonoBehaviour
                 break;
             case Behavior.PLAYER_DEATH:
                 //deathCount = 0;
-                p_Camera.transform.position = target.transform.position + cameraOffSet;
+                p_Camera.transform.position = target.transform.position + cameraOffSet.normalized * cameraDistance;
                 break;
             case Behavior.STATIC_CAMERA_ZONE:
                 break;
