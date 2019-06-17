@@ -72,6 +72,5 @@ public class Projectile : MonoBehaviour
             ParticlesFeedback_Control.instance.SetProjectileImpactCompositeOnScene(transform.position, transform.forward);
             activated = false;
         }
-
     }
 }
