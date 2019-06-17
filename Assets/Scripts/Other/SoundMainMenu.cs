@@ -10,8 +10,8 @@ public class SoundMainMenu : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         FMODUnity.RuntimeManager.PlayOneShot(BSOEvent, transform.position);
-
     }
 
 }

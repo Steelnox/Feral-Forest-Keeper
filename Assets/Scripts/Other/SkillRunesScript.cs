@@ -15,6 +15,8 @@ public class SkillRunesScript : MonoBehaviour
     [FMODUnity.EventRef]
     public string successEvent;
 
+    public GameObject particles;
+
     private void Start()
     {
         playerManager = PlayerManager.instance;
@@ -26,6 +28,8 @@ public class SkillRunesScript : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot(successEvent, transform.position);
 
+            particles.SetActive(true);
+
             playerManager.dashSkillSlot = dash;
         }
 
@@ -33,6 +37,8 @@ public class SkillRunesScript : MonoBehaviour
         {
             FMODUnity.RuntimeManager.PlayOneShot(successEvent, transform.position);
 
+            particles.SetActive(true);
+            
             playerManager.powerGauntletSlot = gauntlet;
         }
     }
