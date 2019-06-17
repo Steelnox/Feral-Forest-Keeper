@@ -14,8 +14,4 @@ public class SoundMainMenu : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        
-    }
 }
