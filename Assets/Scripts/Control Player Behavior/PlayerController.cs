@@ -1,6 +1,7 @@
 ﻿/*using System.Collections;
 using System.Collections.Generic;*/
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public class PlayerController : MonoBehaviour
     public bool no_X_Input;
     public bool no_Y_Input;
     public bool startWithAllSkills;
+    public bool movingWhileAttacking;
+    public bool orientWhileAttaking;
     public bool playerAlive;
     public bool pushing;
     public bool falling;
@@ -103,8 +106,6 @@ public class PlayerController : MonoBehaviour
     [FMODUnity.EventRef]
     public string pickKeyEvent;
 
-   
-
     void Start()
     {
         playerAlive = true;
@@ -125,95 +126,59 @@ public class PlayerController : MonoBehaviour
         flyingDashFinished = false;
         checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
         dashTime = 0;
-
-
-
     }
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    playerAlive = true;
-    //    attackPivot.transform.localRotation = Quaternion.Euler(0, -60, 0);
-    //    SetCanMove(true);
-    //    ChangeState(movementState);
-    //    actualSpeedMultipler = movementSpeed;
-    //    dashing = false;
-    //    dashCooldown = dashCooldownTime;
-    //    actualPlayerLive = playerLive;
-    //    initFallingPosition = GameManager.instance.levelCheckPoint.transform.position;
-    //    pushing = false;
-    //    actualHitCooldown = hitCooldownTime;
-    //    attackTrail.enabled = false;
-    //    deathByFall = false;
-    //    fallingToDeath = false;
-    //    showingWeapon = false;
-    //    flyingDashFinished = false;
-    //    checkDistanceOffset = GenericSensUtilities.instance.DistanceBetween2Vectors(playerRoot.transform.position, characterModel.transform.position);
-    //}
+
     void Update()
     {
-        CheckInputsConditions();
-        ApplyGravity();
-        SetDashCooldown();
-        ItemsDetection();
-        DoorsDetection();
-        SanctuaryDetection();
-        ColorRockDetection();
-        SimonRockDetection();
-        WoodSignDetection();
-        SkillRunesDetection();
-
-        if (gettingHit)
+        if (SceneManager.GetActiveScene().name == "Lvl1 Def")
         {
-            if (!PlayerAnimationController.instance.GetGettingHitAnimState())PlayerAnimationController.instance.SetGettingHitAnim(true);
-            PlayerHitFeedbackController.instance.Hit();
-            actualHitCooldown -= Time.deltaTime;
-            if (actualHitCooldown <= 0)
+            if (GameManager.instance.GetRespawnDone() && !deathByFall)CheckInputsConditions();
+            ApplyGravity();
+            SetDashCooldown();
+            ItemsDetection();
+            DoorsDetection();
+            SanctuaryDetection();
+            ColorRockDetection();
+            SimonRockDetection();
+            WoodSignDetection();
+            SkillRunesDetection();
+
+            if (gettingHit)
             {
-                PlayerAnimationController.instance.SetGettingHitAnim(false);
-                actualHitCooldown = hitCooldownTime;
-                gettingHit = false;
+                if (!PlayerAnimationController.instance.GetGettingHitAnimState()) PlayerAnimationController.instance.SetGettingHitAnim(true);
+                PlayerHitFeedbackController.instance.Hit();
+                actualHitCooldown -= Time.deltaTime;
+                if (actualHitCooldown <= 0)
+                {
+                    PlayerAnimationController.instance.SetGettingHitAnim(false);
+                    actualHitCooldown = hitCooldownTime;
+                    gettingHit = false;
+                }
             }
-        }
-        /////INPUTS CHECK////
-        //XboxGamePadKeyTest();
+            /////INPUTS CHECK////
+            //XboxGamePadKeyTest();
 
-        //imGrounded = p_controller.isGrounded; //Now each State setup imGrounded.
-        if (imGrounded) initFallingPosition = this.transform.position;
-        /////////END OF MOVEMENT LOGIC////////
+            //imGrounded = p_controller.isGrounded; //Now each State setup imGrounded.
+            if (imGrounded) initFallingPosition = this.transform.position;
+            /////////END OF MOVEMENT LOGIC////////
 
-        ///Check if Over Grass///
-        if (!PlayerSensSystem.instance.CheckIfOverGrass() && currentState != pushLogState && currentState != pushRockState)
-        {
-            MovingInSlowZone(false);
-        }
+            ///Check if Over Grass///
+            if (!PlayerSensSystem.instance.CheckIfOverGrass() && currentState != pushLogState && currentState != pushRockState)
+            {
+                MovingInSlowZone(false);
+            }
 
-        //if (actualPlayerLive == 0)
-        //{
-            
-        //}
-        if (actualPlayerLive > 0)
-        {
-            if (playerAlive != true) playerAlive = true;
+            if (actualPlayerLive > 0)
+            {
+                if (playerAlive != true) playerAlive = true;
+            }
+            else
+            {
+                if (playerAlive != false) playerAlive = false;
+            }
+
+            p_StateMachine.ExecuteState();
         }
-        else
-        {
-            if (playerAlive != false) playerAlive = false;
-        }
-        //if (showingWeapon)
-        //{
-        //    showingWeaponCount += Time.deltaTime;
-        //    if(GetCanMove())SetCanMove(false);
-        //    float time = showingWeaponCount / 0.5f;
-        //    playerRoot.transform.forward = Vector3.Lerp(showingWeaponInitForward, showingDirection, time);
-        //    if (showingWeaponCount > 2.0f)
-        //    {
-        //        SetCanMove(true);
-        //        showingWeapon = false;
-        //        showingWeaponCount = 0;
-        //    }
-        //}
-        p_StateMachine.ExecuteState();
-        
     }
     private void DoorsDetection()
     {
@@ -314,7 +279,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestSanctuary != null) 
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSanctuary.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.sanctuaryInteractionDistance)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSanctuary.transform.position, transform.position) < PlayerManager.instance.sanctuaryInteractionDistance)
             {
                 Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.F))
@@ -336,7 +301,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestColorRock != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestColorRock.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.colorsPuzzlePilarInteractionDistance)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestColorRock.transform.position, transform.position) < PlayerManager.instance.colorsPuzzlePilarInteractionDistance)
             {
                 Player_GUI_System.instance.SetOnScreenButtonBColor(true);
 
@@ -359,7 +324,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestSimonRock != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSimonRock.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.simonMushroomInteractionDistance)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSimonRock.transform.position, transform.position) < PlayerManager.instance.simonMushroomInteractionDistance)
             {
                 //Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 Player_GUI_System.instance.SetOnScreenButtonBSimon(true);
@@ -383,7 +348,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestWoodSign != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestWoodSign.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.woodSignInteractionDistance)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestWoodSign.transform.position, transform.position) < PlayerManager.instance.woodSignInteractionDistance)
             {
                 //Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 Player_GUI_System.instance.SetOnScreenButtonBWoodSign(true);
@@ -408,7 +373,7 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerSensSystem.instance.nearestSkillRunes != null)
         {
-            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSkillRunes.transform.position, PlayerController.instance.transform.position) < PlayerManager.instance.skillPillarsInteractionDistance)
+            if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerSensSystem.instance.nearestSkillRunes.transform.position, transform.position) < PlayerManager.instance.skillPillarsInteractionDistance)
             {
                 //Player_GUI_System.instance.SetOnScreenActivateSanctuaryIcon(true);
                 Player_GUI_System.instance.SetOnScreenButtonBSkillRunes(true);
@@ -430,7 +395,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ApplyGravity()
     {
-        if (!imGrounded && !dashing/*flyingDashFinished/*&& currentState != pushRockState*/)
+        if (!imGrounded && !dashing)
         {
             gravity += Mathf.Exp(gravityForce);
 
@@ -449,34 +414,6 @@ public class PlayerController : MonoBehaviour
                     falling = true;
                 }
             }
-            
-            //if (PlayerSensSystem.instance.CheckGroundDistance() > 0.5f)
-            //{
-            //    //if (!dashing)
-            //    //{
-            //    //    falling = true;
-            //    //}
-            //    if (PlayerSensSystem.instance.CheckGroundDistance() >= deathHeight)
-            //    {
-            //        fallingToDeath = true;
-            //        deathByFall = true;
-            //    }
-            //    else
-            //    {
-            //        falling = true;
-            //    }
-            //    //Debug.Log("Player almost touching the ground");
-
-            //    //if (GenericSensUtilities.instance.DistanceBetween2Vectors(initFallingPosition, this.transform.position) > deathHeight && actualPlayerLive > 0)
-            //    //{
-            //    //    deathByFall = true;
-            //    //}
-            //}
-            //else if (PlayerSensSystem.instance.CheckGroundDistance() < 0.5f)
-            //{
-            //    falling = false;
-            //    fallingToDeath = false;
-            //}
         }
         else
         {
@@ -490,15 +427,15 @@ public class PlayerController : MonoBehaviour
     {
         CheckInputs();
 
-        if (PlayerManager.instance.branchWeaponSlot != null || PlayerManager.instance.leafSwordSlot != null)
+        if (PlayerManager.instance.branchWeaponSlot != null || PlayerManager.instance.leafSwordSlot != null && GameManager.instance.GetRespawnDone())
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("X") && !attacking && !dashing && !gettingHit && !falling && !fallingToDeath)
+            if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("X") && !attacking && !dashing /*&& !gettingHit*/ && !falling && !fallingToDeath)
             {
                 ChangeState(meleeState);
             }
         }
         
-        if (PlayerManager.instance.dashSkillSlot != null)
+        if (PlayerManager.instance.dashSkillSlot != null && GameManager.instance.GetRespawnDone() && !falling || !deathByFall || !fallingToDeath)
         {
             if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.Space) && !attacking && imGrounded && !gettingHit)
             {
@@ -506,7 +443,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (PlayerManager.instance.powerGauntletSlot != null)
+        if (PlayerManager.instance.powerGauntletSlot != null && GameManager.instance.GetRespawnDone())
         {
             if (!Input.GetButton("RB") || !Input.GetKey(KeyCode.E) && PlayerSensSystem.instance.nearestRock != null && GenericSensUtilities.instance.DistanceBetween2Vectors(characterModel.transform.position, PlayerSensSystem.instance.nearestRock.transform.position) < PlayerSensSystem.instance.nearestRock.attachDistance
             || PlayerSensSystem.instance.nearestLog != null && GenericSensUtilities.instance.DistanceBetween2Vectors(characterModel.transform.position, PlayerSensSystem.instance.nearestLog.transform.position) < PlayerSensSystem.instance.nearestLog.attachDistance)
@@ -608,7 +545,7 @@ public class PlayerController : MonoBehaviour
             Z_Input = 0;
         }
 
-        if (/*canMove && */!gettingHit && !attacking && imGrounded)
+        if (!gettingHit /*&& imGrounded*/)
         {
             direction.x = X_Input;
             direction.y = Z_Input;

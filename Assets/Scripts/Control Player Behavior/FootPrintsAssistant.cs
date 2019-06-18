@@ -7,15 +7,17 @@ public class FootPrintsAssistant : MonoBehaviour
     public GameObject rightFoot;
     public GameObject leftFoot;
 
-
+    [FMODUnity.EventRef]
+    public string walkEvent;
 
     public void R_Foot()
     {
         PlayerParticlesSystemController.instance.SetWalkDustTrail_R_ParticlesOnScene(rightFoot.transform.position);
-
+        FMODUnity.RuntimeManager.PlayOneShot(walkEvent, transform.position);
     }
     public void L_Foot()
     {
         PlayerParticlesSystemController.instance.SetWalkDustTrail_L_ParticlesOnScene(leftFoot.transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(walkEvent, transform.position);
     }
 }

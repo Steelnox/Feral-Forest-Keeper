@@ -16,8 +16,11 @@ public class Sanctuary : MonoBehaviour
     [FMODUnity.EventRef]
     public string successEvent;
 
-    public GameObject particles1;
-    public GameObject particles2;
+    //public GameObject particles1;
+    //public GameObject particles2;
+    public GameObject particlesSpawn;
+    public ParticlesCompositeSystem activeSanctiaryParticles;
+    public Particles_Behavior firstWave;
 
 
     void Start()
@@ -38,8 +41,10 @@ public class Sanctuary : MonoBehaviour
 
             FMODUnity.RuntimeManager.PlayOneShot(successEvent, transform.position);
 
-            particles1.SetActive(true);
-            particles2.SetActive(true);
+            activeSanctiaryParticles.PlayComposition(particlesSpawn.transform.position);
+            firstWave.SetParticlesOnScene(transform.position);
+            //particles1.SetActive(true);
+            //particles2.SetActive(true);
 
 
             actionDone = true;

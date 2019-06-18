@@ -28,6 +28,7 @@ public class Player_TargetCamera_Offset_Controller : MonoBehaviour
     void Start()
     {
         desiredPos = GameManager.instance.levelCheckPoint.transform.position;
+        //offsetTarget.transform.position = desiredPos;
         count = 0;
         actual_X_MaxOffset = x_MaxOffset_Standard;
         actual_Y_MaxOffset = y_MaxOffset_Standard;

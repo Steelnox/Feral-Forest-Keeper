@@ -75,6 +75,7 @@ public class PlayerHitFeedbackController : MonoBehaviour
                     fallHit = false;
                     evaluateTime = 0;
                     curveValue = 0;
+                    GameManager.instance.SetRespawnDone(true);
                 }
             }
             else

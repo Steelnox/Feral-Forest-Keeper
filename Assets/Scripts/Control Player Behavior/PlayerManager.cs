@@ -34,16 +34,15 @@ public class PlayerManager : MonoBehaviour
     public float skillPillarsInteractionDistance;
     public float sanctuaryInteractionDistance;
 
-    private PlayerController playerController;
+    private bool haveDashSkill;
+    private bool havePowerSkill;
 
     public GameObject canvas;
 
     void Start()
     {
-        //branchWeaponSlot = GameManager.instance.branchItem;
-        //CheckIfHaveBranchWeaponItem();
-
-        playerController = PlayerController.instance;
+        haveDashSkill = false;
+        havePowerSkill = false;
 
         if (PlayerController.instance.startWithAllSkills)
         {
@@ -62,7 +61,6 @@ public class PlayerManager : MonoBehaviour
             powerGauntletSlot = null;
             dashSkillSlot = null;
         }
-
     }
 
     void Update()
@@ -73,7 +71,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            if (playerController.dashCooldown >= playerController.dashCooldownTime)
+            if (PlayerController.instance.dashCooldown >= PlayerController.instance.dashCooldownTime)
             {
                 canvas.SetActive(false);
             }
@@ -82,8 +80,16 @@ public class PlayerManager : MonoBehaviour
                 canvas.SetActive(true);
             }
         }
-
-        
+        if (!haveDashSkill && dashSkillSlot != null)
+        {
+            PlayerParticlesSystemController.instance.SetPickUpSkillPaticlesOnScene(PlayerController.instance.playerRoot.transform.position);
+            haveDashSkill = true;
+        }
+        if (!havePowerSkill && powerGauntletSlot != null)
+        {
+            PlayerParticlesSystemController.instance.SetPickUpSkillPaticlesOnScene(PlayerController.instance.playerRoot.transform.position);
+            havePowerSkill = true;
+        }
     }
     public void AddItemToInventary(Item i)
     {

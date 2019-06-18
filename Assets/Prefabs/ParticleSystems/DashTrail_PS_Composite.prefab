@@ -4863,7 +4863,7 @@ ParticleSystemRenderer:
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
-  m_VertexStreams: 0001030409
+  m_VertexStreams: 00030409
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -4920,7 +4920,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -4978,7 +4978,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 0
+  randomSeed: 1423946545
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5038,8 +5038,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 1
+      scalar: 2
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6419,7 +6419,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.22
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2

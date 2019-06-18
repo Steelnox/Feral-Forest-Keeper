@@ -174,20 +174,6 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.24067797
-        functionName: StepSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.74576277
-        functionName: StepSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -225,20 +211,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.68244934
         functionName: L_Foot
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.20677966
-        functionName: StepSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6881356
-        functionName: StepSound
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

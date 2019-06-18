@@ -7,8 +7,7 @@ public class FinishAnimationController : MonoBehaviour
     private bool dashArriveIsDone;
     private bool attackFinish;
 
-    [FMODUnity.EventRef]
-    public string walkEvent;
+   
 
     [FMODUnity.EventRef]
     public string attackEvent;
@@ -48,10 +47,10 @@ public class FinishAnimationController : MonoBehaviour
         return attackFinish;
     }
 
-    public void StepSound()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(walkEvent, transform.position);
-    }
+    //public void StepSound()
+    //{
+    //    FMODUnity.RuntimeManager.PlayOneShot(walkEvent, transform.position);
+    //}
 
     public void AttackSound()
     {

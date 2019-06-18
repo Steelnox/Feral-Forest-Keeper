@@ -46,8 +46,7 @@ public class GameManager : MonoBehaviour
     private bool deathByFall;
     [SerializeField]
     private bool playerDead;
-
-
+    private bool respawnDone;
 
     void Start()
     {
@@ -59,18 +58,8 @@ public class GameManager : MonoBehaviour
         startCheckPointPosition = levelCheckPoint.transform.position;
         branchItem_InitLocation = branchItem.transform.position;
         swordItem_InitLocation = swordItem.transform.position;
+        respawnDone = true;
     }
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    actualRespawnCoolDown = respawnCoolDown;
-    //    provisionalGUIMenuOnScreenPos = provisionalGUIMenu.anchoredPosition;
-    //    hidePos = Vector2.down * 1000;
-    //    Cursor.lockState = CursorLockMode.Locked;
-    //    PlayerController.instance.transform.position = levelCheckPoint.transform.position;
-    //    startCheckPointPosition = levelCheckPoint.transform.position;
-    //    branchItem_InitLocation = branchItem.transform.position;
-    //    swordItem_InitLocation = swordItem.transform.position;
-    //}
     void Update()
     {
 
@@ -109,6 +98,7 @@ public class GameManager : MonoBehaviour
             {
                 //Debug.Log("Actual respawn == resapwn Cooldown");
                 PlayerHitFeedbackController.instance.FallHit();
+                SetRespawnDone(false);
                 //PlayerController.instance.SetCanMove(false);
                 PlayerController.instance.noInput = true;
                 PlayerController.instance.ChangeState(PlayerController.instance.deathState);
@@ -234,5 +224,13 @@ public class GameManager : MonoBehaviour
     {
         playerDead = true;
         if (PlayerController.instance.currentState != PlayerController.instance.deathState) PlayerController.instance.ChangeState(PlayerController.instance.deathState);
+    }
+    public void SetRespawnDone(bool b)
+    {
+        respawnDone = b;
+    }
+    public bool GetRespawnDone()
+    {
+        return respawnDone;
     }
 }
