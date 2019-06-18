@@ -160,14 +160,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.24362607
+      - time: 0.16723719
         functionName: R_Foot
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.73654395
+      - time: 0.6497384
         functionName: L_Foot
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -202,14 +202,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.2036368
+      - time: 0.16891457
         functionName: R_Foot
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.68244934
+      - time: 0.64078265
         functionName: L_Foot
         data: 
         objectReferenceParameter: {instanceID: 0}

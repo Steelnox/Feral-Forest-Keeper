@@ -530,7 +530,7 @@ MonoBehaviour:
   smoothAttackTrail: 30
   attackCoolDown: 0.5
   damagePlayer: 1
-  deathHeight: 2.2
+  deathHeight: 2.4
   hitCooldownTime: 0
   X_Input: 0
   Z_Input: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
   noInput: 0
   no_X_Input: 0
   no_Y_Input: 0
-  startWithAllSkills: 0
+  startWithAllSkills: 1
   movingWhileAttacking: 0
   orientWhileAttaking: 0
   playerAlive: 0
@@ -708,6 +708,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushingMovement: {x: 0, y: 0, z: 0}
+  constactDistance: 0
+  actualContactDistance: 0
 --- !u!114 &7629581098136133352
 MonoBehaviour:
   m_ObjectHideFlags: 0

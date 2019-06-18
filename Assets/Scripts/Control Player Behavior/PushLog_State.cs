@@ -6,10 +6,16 @@ public class PushLog_State : State
 {
     [SerializeField]
     private Vector3 pushingMovement;
-    private int lastDistance;
+    [SerializeField]
+    private float constactDistance;
+    [SerializeField]
+    private float actualContactDistance;
+    private MovableLog lastMovableLog;
+    //private int lastDistance;
 
     public override void Enter()
     {
+        PlayerController.instance.pushing = true;
         PlayerController.instance.pushDirection = GenericSensUtilities.instance.Transform2DTo3DMovement(PlayerSensSystem.instance.nearestLog.CheckSideToPush()).normalized;
         PlayerController.instance.pushDirection = GenericSensUtilities.instance.Transform2DTo3DMovement(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.pushDirection));
         //PlayerController.instance.characterModel.transform.forward = PlayerController.instance.pushDirection;
@@ -17,12 +23,15 @@ public class PushLog_State : State
         PlayerSensSystem.instance.nearestLog.SetLastNoPushPosition(PlayerSensSystem.instance.nearestLog.transform.position);
         PlayerSensSystem.instance.nearestLog.SetBeingPushed(true);
         PlayerController.instance.MovingInSlowZone(true);
-        lastDistance = (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
+        constactDistance = GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
+        lastMovableLog = PlayerSensSystem.instance.nearestLog;
+        //lastDistance = (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
     }
     public override void Execute()
     {
-        if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.4f /*|| PlayerSensSystem.instance.nearestLog.CheckIfFalling()*/
-            || (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position)) != lastDistance)
+        //if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.4f /*|| PlayerSensSystem.instance.nearestLog.CheckIfFalling()*/
+        //    || (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position)) != lastDistance)
+        if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.5f || PlayerSensSystem.instance.nearestLog.CheckIfFalling() || actualContactDistance < constactDistance - 0.1f || actualContactDistance > constactDistance + 0.1f || lastMovableLog != PlayerSensSystem.instance.nearestLog)
         {
             PlayerController.instance.ChangeState(PlayerController.instance.movementState);
         }
@@ -71,9 +80,10 @@ public class PushLog_State : State
         PlayerController.instance.no_Y_Input = false;
         PlayerController.instance.no_X_Input = false;
         PlayerController.instance.pushDirection = Vector3.zero;
-        PlayerAnimationController.instance.SetPushinAnim(false);
+        //PlayerAnimationController.instance.SetPushinAnim(false);
         //PlayerSensSystem.instance.nearestLog.ResetLastNoPushingPos();
         PlayerSensSystem.instance.nearestLog.SetBeingPushed(false);
         PlayerController.instance.MovingInSlowZone(false);
+        PlayerController.instance.pushing = false;
     }
 }

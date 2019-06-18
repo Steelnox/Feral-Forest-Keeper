@@ -43,7 +43,7 @@ public class Dash_PlayerState : State
         endPosition = startPosition + (dashDirection * dashLenght);
 
         FMODUnity.RuntimeManager.PlayOneShot(dashEvent, transform.position);
-
+        PlayerController.instance.SetInitFallingPosition(transform.position);
     }
     public override void Execute()
     {
@@ -107,9 +107,10 @@ public class Dash_PlayerState : State
     public override void Exit()
     {
         PlayerController.instance.p_controller.Move(Vector3.zero);
-        dashDirection.x = 0;
-        dashDirection.y = 0;
-        dashDirection.z = 0;
+        dashDirection = Vector3.zero;
+        //dashDirection.x = 0;
+        //dashDirection.y = 0;
+        //dashDirection.z = 0;
         //PlayerController.instance.dashTrail.enabled = false;
         PlayerController.instance.dashing = false;
         PlayerController.instance.flyingDashFinished = false;

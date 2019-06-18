@@ -23,6 +23,7 @@ public class OpenableDoors : MonoBehaviour
     public AxisPivot axisPivot;
     public int maxGrades;
     public bool invertTraslationMovement;
+    public Particles_Behavior dustParticles;
 
     private bool activated;
     [SerializeField]
@@ -220,7 +221,7 @@ public class OpenableDoors : MonoBehaviour
                 switch (displacementType)
                 {
                     case DisplacementType.Rotation:
-                        if (opened && movableDoorPivot.transform.rotation.eulerAngles != openRot)
+                        if (opened && GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localRotation.eulerAngles, openRot) > 0.1f)
                         {
                             //Debug.Log("Opennig Door with key");
                             movableDoorPivot.transform.localRotation = Quaternion.Lerp(movableDoorPivot.transform.localRotation, Quaternion.Euler(openRot), Time.deltaTime * smoothmovement);
@@ -235,13 +236,13 @@ public class OpenableDoors : MonoBehaviour
                         {
                             if (invertTraslationMovement)
                             {
-                                if (movableDoorPivot.transform.localPosition != closePositionTraslationVector - maxTraslationVector)
+                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector) > 0.2f)
                                 {
                                     //Debug.Log("OpenableDoor: " + GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector));
                                     movableDoorPivot.transform.localPosition = Vector3.Lerp(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector, Time.deltaTime * smoothmovement);
                                 }
                                 else
-                                if(GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector) < 0.2f)
+                                //if(GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector) < 0.3f)
                                 {
                                     movableDoorPivot.transform.localPosition = closePositionTraslationVector - maxTraslationVector;
                                     finishOpen = true;
@@ -249,12 +250,12 @@ public class OpenableDoors : MonoBehaviour
                             }
                             else
                             {
-                                if (movableDoorPivot.transform.localPosition != closePositionTraslationVector + maxTraslationVector)
+                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector) > 0.2f)
                                 {
                                     movableDoorPivot.transform.localPosition = Vector3.Lerp(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector, Time.deltaTime * smoothmovement);
                                 }
                                 else
-                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector) < 0.2f)
+                                //if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector) < 0.3f)
                                 {
                                     movableDoorPivot.transform.localPosition = closePositionTraslationVector + maxTraslationVector;
                                     finishOpen = true;
@@ -262,6 +263,11 @@ public class OpenableDoors : MonoBehaviour
                             }
                         }
                         break;
+                }
+                if (finishOpen)
+                {
+                    openEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    dustParticles.StopParticles();
                 }
             }
         }
@@ -284,7 +290,7 @@ public class OpenableDoors : MonoBehaviour
                     switch (displacementType)
                     {
                         case DisplacementType.Rotation:
-                            if (movableDoorPivot.transform.localRotation.eulerAngles != openRot)
+                            if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localRotation.eulerAngles, openRot) > 0.1f)
                             {
                                 //Debug.Log("Opennig Door");
                                 movableDoorPivot.transform.localRotation = Quaternion.Lerp(movableDoorPivot.transform.localRotation, Quaternion.Euler(openRot), Time.deltaTime * smoothmovement);
@@ -297,13 +303,13 @@ public class OpenableDoors : MonoBehaviour
                         case DisplacementType.Traslation:
                             if (invertTraslationMovement)
                             {
-                                if (movableDoorPivot.transform.position != closePositionTraslationVector - maxTraslationVector)
+                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector) > 0.2f)
                                 {
                                     //Debug.Log("OpenableDoor: " + GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector));
                                     movableDoorPivot.transform.localPosition = Vector3.Lerp(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector, Time.deltaTime * smoothmovement);
                                 }
                                 else
-                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector) < 0.2f)
+                                //if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector - maxTraslationVector) < 0.2f)
                                 {
                                     movableDoorPivot.transform.localPosition = closePositionTraslationVector - maxTraslationVector;
                                     finishOpen = true;
@@ -311,18 +317,23 @@ public class OpenableDoors : MonoBehaviour
                             }
                             else
                             {
-                                if (movableDoorPivot.transform.position != closePositionTraslationVector + maxTraslationVector)
+                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector) > 0.2f)
                                 {
                                     movableDoorPivot.transform.localPosition = Vector3.Lerp(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector, Time.deltaTime * smoothmovement);
                                 }
                                 else
-                                if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector) < 0.2f)
+                                //if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector + maxTraslationVector) < 0.2f)
                                 {
                                     finishOpen = true;
                                     movableDoorPivot.transform.localPosition = closePositionTraslationVector + maxTraslationVector;
                                 }
                             }
                             break;
+                    }
+                    if (finishOpen)
+                    {
+                        openEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                        dustParticles.StopParticles();
                     }
                 }
                 else
@@ -339,7 +350,7 @@ public class OpenableDoors : MonoBehaviour
                     switch (displacementType)
                     {
                         case DisplacementType.Rotation:
-                            if (movableDoorPivot.transform.localRotation.eulerAngles != closeRot)
+                            if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localRotation.eulerAngles, closeRot) > 0.1f)
                             {
                                 //Debug.Log("Closing Door");
                                 finishOpen = false;
@@ -351,7 +362,7 @@ public class OpenableDoors : MonoBehaviour
                             }
                             break;
                         case DisplacementType.Traslation:
-                            if (movableDoorPivot.transform.localPosition != closePositionTraslationVector)
+                            if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localPosition, closePositionTraslationVector) > 0.1f)
                             {
                                 finishOpen = false;
                                 movableDoorPivot.transform.localPosition = Vector3.Lerp(movableDoorPivot.transform.localPosition, closePositionTraslationVector, Time.deltaTime * smoothmovement);
@@ -381,7 +392,7 @@ public class OpenableDoors : MonoBehaviour
                     switch (displacementType)
                     {
                         case DisplacementType.Rotation:
-                            if (movableDoorPivot.transform.localRotation.eulerAngles != openRot)
+                            if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localRotation.eulerAngles, openRot) > 0.1f)
                             {
                                 //Debug.Log("Opennig Door");
                                 movableDoorPivot.transform.localRotation = Quaternion.Lerp(movableDoorPivot.transform.localRotation, Quaternion.Euler(openRot), Time.deltaTime * smoothmovement);
@@ -421,7 +432,11 @@ public class OpenableDoors : MonoBehaviour
                             }
                             break;
                     }
-                    if (finishOpen) openEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    if (finishOpen)
+                    {
+                        openEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                        dustParticles.StopParticles();
+                    }
                 }
                 else
                 if (!activationSwitch.IsSwitched())
@@ -438,7 +453,7 @@ public class OpenableDoors : MonoBehaviour
                     switch (displacementType)
                     {
                         case DisplacementType.Rotation:
-                            if (movableDoorPivot.transform.localRotation.eulerAngles != closeRot)
+                            if (GenericSensUtilities.instance.DistanceBetween2Vectors(movableDoorPivot.transform.localRotation.eulerAngles, closeRot) > 0.1f)
                             {
                                 //Debug.Log("Closing Door");
                                 movableDoorPivot.transform.localRotation = Quaternion.Lerp(movableDoorPivot.transform.localRotation, Quaternion.Euler(closeRot), Time.deltaTime * smoothmovement);
@@ -476,6 +491,8 @@ public class OpenableDoors : MonoBehaviour
         openEvent.start();
         UnlockDoor();
         opened = true;
+        finishOpen = false;
+        dustParticles.SetParticlesOnScene(transform.position);
     }
     /*public void OpenDoorHolding(bool holding)
     {

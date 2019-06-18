@@ -15,8 +15,9 @@ public class MeleeAtack_PlayerState : State
     public override void Execute()
     {
         if (PlayerAnimationController.instance.finishAnimationController.GetAttackFinish()) PlayerController.instance.ChangeState(PlayerController.instance.movementState);
-        PlayerController.instance.imGrounded = PlayerController.instance.p_controller.isGrounded;
         PlayerController.instance.p_controller.Move(Vector3.zero);
+        PlayerController.instance.imGrounded = PlayerController.instance.p_controller.isGrounded;
+        
 
         ///Movement While Attaking Added
         if (PlayerController.instance.movingWhileAttacking)

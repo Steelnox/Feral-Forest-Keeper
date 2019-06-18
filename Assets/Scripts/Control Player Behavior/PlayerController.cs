@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Lvl1 Def")
         {
-            if (GameManager.instance.GetRespawnDone() && !deathByFall)CheckInputsConditions();
+            if (playerAlive && GameManager.instance.GetRespawnDone() && !deathByFall)CheckInputsConditions();
             ApplyGravity();
             SetDashCooldown();
             ItemsDetection();
@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
                         {
                             PlayerManager.instance.AddItemToInventary(PlayerSensSystem.instance.nearestItem);
                             PlayerSensSystem.instance.nearestItem.CollectItem();
-                            PlayerManager.instance.CheckIfHaveBranchWeaponItem();
+                            if (PlayerManager.instance.branchWeaponSlot == null) PlayerManager.instance.CheckIfHaveBranchWeaponItem();
                             ChangeState(showingWeaponState);
                         }
                         break;
@@ -228,7 +228,7 @@ public class PlayerController : MonoBehaviour
                         {
                             PlayerManager.instance.AddItemToInventary(PlayerSensSystem.instance.nearestItem);
                             PlayerSensSystem.instance.nearestItem.CollectItem();
-                            PlayerManager.instance.CheckIfHaveLeafWeaponItem();
+                            if (PlayerManager.instance.leafSwordSlot == null) PlayerManager.instance.CheckIfHaveLeafWeaponItem();
                             ChangeState(showingWeaponState);
 
                         }
@@ -414,6 +414,7 @@ public class PlayerController : MonoBehaviour
                     falling = true;
                 }
             }
+            Debug.Log("InitFallongPositionDistance = " + GenericSensUtilities.instance.DistanceBetween2Vectors(initFallingPosition, transform.position));
         }
         else
         {
@@ -651,6 +652,11 @@ public class PlayerController : MonoBehaviour
         p_StateMachine.ChangeState(state);
 
         currentState = p_StateMachine.currentState;
+    }
+
+    public void SetInitFallingPosition(Vector3 position)
+    {
+        initFallingPosition = position;
     }
 
     ///////GAMEPAD TEST//////////
