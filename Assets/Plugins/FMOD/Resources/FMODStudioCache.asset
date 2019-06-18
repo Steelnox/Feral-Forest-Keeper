@@ -71,7 +71,7 @@ MonoBehaviour:
   - {fileID: 114711791576180096}
   StringsBanks:
   - {fileID: 114996408216251172}
-  stringsBankWriteTime: 636963309981457170
+  stringsBankWriteTime: 636964995807275311
   cacheVersion: 3
 --- !u!114 &114001866934749554
 MonoBehaviour:
@@ -11657,7 +11657,7 @@ MonoBehaviour:
   Path: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
     FMOD project\Build\Desktop\Master.bank
   SubDir: 
-  lastModified: 636963309981392123
+  lastModified: 636964995807195254
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -16483,7 +16483,7 @@ MonoBehaviour:
   Path: C:\Users\Hobbes\Documents\Videojocs Carpeta projectes\FERAL_PROJECT\GOLDlocal\Feral-Forest-Keeper\Assets\Audio\forestKeeper
     FMOD project\Build\Desktop\Master.strings.bank
   SubDir: 
-  lastModified: 636963309981457170
+  lastModified: 636964995807275311
   LoadResult: 0
   FileSizes:
   - Name: 
