@@ -13,21 +13,24 @@ public class MovableLog : MonoBehaviour
     public float weight;
     [SerializeField]
     private Vector3 lastNoPushingPos;
-    private MeshRenderer bodyMeshrenderer;
+    public MeshRenderer bodyMeshrenderer;
+    public Rigidbody myRigidbody;
 
     void Start()
     {
-        bodyMeshrenderer = logBody.GetComponent<MeshRenderer>();
+        //bodyMeshrenderer = logBody.GetComponent<MeshRenderer>();
         lastNoPushingPos = Vector3.zero;
+        myRigidbody.isKinematic = true;
     }
 
     void Update()
     {
-        //CheckSideToPush();
+        CheckSideToPush();
         if (beingPushed)
         {
-            if (CheckGroundDistance() > bodyMeshrenderer.bounds.extents.y + 0.2f || logBody.transform.position.y < lastNoPushingPos.y)
+            if (CheckGroundDistance() > bodyMeshrenderer.bounds.extents.y / 2 + 1.0f || logBody.transform.position.y < lastNoPushingPos.y - 1.0f)
             {
+                myRigidbody.isKinematic = false;
                 falling = true;
             }
             else
@@ -45,58 +48,13 @@ public class MovableLog : MonoBehaviour
         Vector2 localDirection = new Vector2(0, 0);
         attchAviable = false;
 
-        //float angleBetweenForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.characterModel.transform.position, FindContactPoint(PlayerController.instance.transform.position))), GenericSensUtilities.instance.Transform3DTo2DMovement(logBody.transform.forward));
-        //float angleBetweenRight = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerController.instance.characterModel.transform.position, FindContactPoint(PlayerController.instance.transform.position))), GenericSensUtilities.instance.Transform3DTo2DMovement(logBody.transform.right));
-        //float angleBetweenPlayerForwardAndForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(logBody.transform.forward));
-        //float angleBetweenPlayerForwardAndRight = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(logBody.transform.right));
-        float angleBetweenPlayerForwardAndContactPointForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerAnimationController.instance.transform.position, FindContactPoint(PlayerAnimationController.instance.transform.position))));
-
         if (GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.characterModel.transform.position, transform.position) < attachDistance)
         {
+            float angleBetweenPlayerForwardAndContactPointForward = Vector2.Angle(GenericSensUtilities.instance.Transform3DTo2DMovement(PlayerController.instance.characterModel.transform.forward), GenericSensUtilities.instance.Transform3DTo2DMovement(GenericSensUtilities.instance.GetDirectionFromTo_N(PlayerAnimationController.instance.transform.position, FindContactPoint(PlayerAnimationController.instance.transform.position))));
             localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(transform.forward);
             if (angleBetweenPlayerForwardAndContactPointForward < angleToContact && angleBetweenPlayerForwardAndContactPointForward > 0)
                 attchAviable = true;
-            //if (angleBetweenForward > 180 - angleToContact / 2 && angleBetweenForward < 180 + angleToContact / 2) //PLAYER ON FORWARDS SIDE
-            //{
-            //    //localDirection.y = 1;
-            //    localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(transform.forward);
-            //    if (angleBetweenPlayerForwardAndForward > 180 - angleToContact / 2 && angleBetweenPlayerForwardAndForward < 180 + angleToContact / 2)
-            //        attchAviable = true;
-            //    //Debug.Log("PLAYER ON FORWARD: " + angleBetweenPlayerForwardAndForward);
-            //    //Debug.Log("PLAYER ON FORWARD SIDE: " + angleBetweenForward);
-            //}
-            //else
-            //if (angleBetweenForward < angleToContact / 2) //PLAYERS ON BACK SIDE
-            //{
-            //    //localDirection.y = -1;
-            //    localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(-transform.forward);
-            //    if (angleBetweenPlayerForwardAndForward < angleToContact / 2)
-            //        attchAviable = true;
-            //    //Debug.Log("PLAYER ON FORWARD: " + angleBetweenPlayerForwardAndForward);
-            //    //Debug.Log("PLAYER ON BACK SIDE: " + angleBetweenForward);
-            //}
-            //else
-            //if (angleBetweenRight > 180 - angleToContact / 2 && angleBetweenRight < 180 + angleToContact / 2) //PLAYERS ON RIGHT SIDE
-            //{
-            //    //localDirection.x = 1;
-            //    localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(transform.right);
-            //    if (angleBetweenPlayerForwardAndRight > 180 - angleToContact / 2 && angleBetweenPlayerForwardAndRight < 180 + angleToContact / 2)
-            //        attchAviable = true;
-            //    //Debug.Log("PLAYER ON RIGHT: " + angleBetweenPlayerForwardAndRight);
-            //    //Debug.Log("PLAYER ON RIGHT SIDE " + angleBetweenRight);
-            //}
-            //else
-            //if (angleBetweenRight < angleToContact / 2) //PLAYERS ON LEFT SIDE
-            //{
-            //    //localDirection.x = -1;
-            //    localDirection = GenericSensUtilities.instance.Transform3DTo2DMovement(-transform.right);
-            //    if (angleBetweenPlayerForwardAndRight < angleToContact / 2)
-            //        attchAviable = true;
-            //    //Debug.Log("PLAYER ON RIGHT: " + angleBetweenPlayerForwardAndRight);
-            //    //Debug.Log("PLAYER ON LEFT SIDE " + angleBetweenRight);
-            //}
         }
-
         //Debug.Log("LocalDirection on rock: " + localDirection);
         return localDirection;
     }
@@ -110,6 +68,14 @@ public class MovableLog : MonoBehaviour
     public void SetBeingPushed(bool b)
     {
         beingPushed = b;
+        if (beingPushed == true)
+        {
+            myRigidbody.isKinematic = false;
+        }
+        if (beingPushed == false && falling == false)
+        {
+            myRigidbody.isKinematic = true;
+        }
     }
     public bool CheckIfFalling()
     {
@@ -118,17 +84,21 @@ public class MovableLog : MonoBehaviour
     public float CheckGroundDistance()
     {
         float dis;
-        Ray ray = new Ray(logBody.transform.position, Vector3.down);
+        Ray ray = new Ray(logBody.transform.position, Vector3.down * bodyMeshrenderer.bounds.extents.y / 2);
         RaycastHit rayHit;
         Physics.Raycast(ray, out rayHit);
 
         if (rayHit.collider != null)
         {
+            Debug.DrawLine(logBody.transform.position, rayHit.point, Color.red);
             dis = GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, rayHit.point);
             //Debug.Log("Ground Distance = " + dis);
             return dis;
         }
-        return 0;
+        else
+        {
+            return 0;
+        }
     }
     public void SetLastNoPushPosition(Vector3 _pos)
     {

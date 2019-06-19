@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3386922256893146590}
   - component: {fileID: 3386922256893146591}
   - component: {fileID: 3033950963570696589}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Enemy_Projectile_Impact_PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4747,7 +4747,7 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
@@ -4782,7 +4782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3386922257543115247}
   - component: {fileID: 7082938176932736035}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Projectile_Impact_Composite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

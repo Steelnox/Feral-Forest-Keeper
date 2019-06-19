@@ -13,6 +13,7 @@ public class Item : MonoBehaviour
     public bool collected;
     private Vector3 onScenPoition;
     private AnimationCurve curve;
+    [SerializeField]
     private ParticlesCompositeSystem myParticles;
 
     public void Start()
@@ -22,21 +23,33 @@ public class Item : MonoBehaviour
         curve.postWrapMode = WrapMode.PingPong;
         if (!collected)
         {
+            //myParticles = null;
+            //while(myParticles == null )
+            //{
+            //    myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
+            //}
             myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
             myParticles.PlayComposition(transform.position);
         }
     }
-    private void OnLevelWasLoaded(int level)
-    {
-        onScenPoition = transform.position;
-        curve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
-        curve.postWrapMode = WrapMode.PingPong;
-        if (!collected)
-        {
-            myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
-            myParticles.PlayComposition(transform.position);
-        }
-    }
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    onScenPoition = transform.position;
+    //    curve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+    //    curve.postWrapMode = WrapMode.PingPong;
+    //    if (!collected)
+    //    {
+    //        //myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
+    //        //myParticles.PlayComposition(transform.position);
+    //        myParticles = null;
+    //        while (myParticles == null)
+    //        {
+    //            myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
+    //        }
+    //        //myParticles = ParticlesFeedback_Control.instance.GetNOActiveCompoisteOnList(ParticlesFeedback_Control.instance.itemsScrollUpSparksParticlesPOOL);
+    //        myParticles.PlayComposition(transform.position);
+    //    }
+    //}
     public void Update()
     {
         if (!collected)

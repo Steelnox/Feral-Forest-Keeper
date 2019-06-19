@@ -46,8 +46,9 @@ public class ParticlesFeedback_Control : MonoBehaviour
     {
         for (int i = 0; i < list.Length; i++)
         {
-            if (!list[i].IsCompositePlaying())
+            if (!list[i].picked && !list[i].IsCompositePlaying())
             {
+                list[i].picked = true;
                 return list[i];
             }
         }

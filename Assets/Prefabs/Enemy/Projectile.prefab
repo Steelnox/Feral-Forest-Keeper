@@ -143,7 +143,6 @@ MonoBehaviour:
   activated: 0
   startPosition: {x: 0, y: 0, z: 0}
   trailParticles: {fileID: 5937436095787252180}
-  impactParticlesComposite: {fileID: 0}
 --- !u!1001 &3418327549811439071
 PrefabInstance:
   m_ObjectHideFlags: 0

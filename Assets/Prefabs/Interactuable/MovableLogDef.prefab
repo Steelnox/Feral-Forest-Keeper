@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4336088380054614082}
   - component: {fileID: 4457165309541546934}
   - component: {fileID: 4234905844050232990}
-  - component: {fileID: 657499768434686907}
+  - component: {fileID: 5766264765187281021}
   m_Layer: 10
   m_Name: MovableLogDef
   m_TagString: Untagged
@@ -54,6 +54,8 @@ MonoBehaviour:
   attachDistance: 2
   weight: 1
   lastNoPushingPos: {x: 0, y: 0, z: 0}
+  bodyMeshrenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
 --- !u!54 &4234905844050232990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70,7 +72,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 96
   m_CollisionDetection: 1
---- !u!65 &657499768434686907
+--- !u!65 &5766264765187281021
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,8 +83,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.2, y: 0.6, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.28, y: 0.66, z: 0.69}
+  m_Center: {x: 0.05, y: 0, z: 0}
 --- !u!208 &1785613975315105978
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -120,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 423aac9d35b069a4c944bfb4ac54a02b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 423aac9d35b069a4c944bfb4ac54a02b, type: 3}
       propertyPath: m_LocalRotation.x

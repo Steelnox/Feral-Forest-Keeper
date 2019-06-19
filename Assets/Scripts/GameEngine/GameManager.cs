@@ -59,6 +59,13 @@ public class GameManager : MonoBehaviour
         branchItem_InitLocation = branchItem.transform.position;
         swordItem_InitLocation = swordItem.transform.position;
         respawnDone = true;
+        foreach(Item i in liveUpPool)
+        {
+            if (i.transform.position == transform.position)
+            {
+
+            }
+        }
     }
     void Update()
     {

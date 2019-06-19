@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4929074536061074289}
   - component: {fileID: 7194125137903521802}
   - component: {fileID: 4340918912664704685}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4708,7 +4708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3233557444674273652}
   - component: {fileID: 9013484477427092491}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Projectile_Trail_PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}

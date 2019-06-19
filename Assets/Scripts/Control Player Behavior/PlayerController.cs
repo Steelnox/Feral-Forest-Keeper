@@ -436,7 +436,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (PlayerManager.instance.dashSkillSlot != null && GameManager.instance.GetRespawnDone() && !falling || !deathByFall || !fallingToDeath)
+        if (PlayerManager.instance.dashSkillSlot != null && GameManager.instance.GetRespawnDone() && (!falling || !deathByFall || !fallingToDeath))
         {
             if (Input.GetButtonDown("A") || Input.GetKeyDown(KeyCode.Space) && !attacking && imGrounded && !gettingHit)
             {

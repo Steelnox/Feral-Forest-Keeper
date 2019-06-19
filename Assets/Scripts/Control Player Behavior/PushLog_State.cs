@@ -11,7 +11,7 @@ public class PushLog_State : State
     [SerializeField]
     private float actualContactDistance;
     private MovableLog lastMovableLog;
-    //private int lastDistance;
+    private int lastDistance;
 
     public override void Enter()
     {
@@ -23,15 +23,15 @@ public class PushLog_State : State
         PlayerSensSystem.instance.nearestLog.SetLastNoPushPosition(PlayerSensSystem.instance.nearestLog.transform.position);
         PlayerSensSystem.instance.nearestLog.SetBeingPushed(true);
         PlayerController.instance.MovingInSlowZone(true);
-        constactDistance = GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
+        //constactDistance = GenericSensUtilities.instance.DistanceBetween2Vectors(PlayerController.instance.transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
         lastMovableLog = PlayerSensSystem.instance.nearestLog;
-        //lastDistance = (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
+        lastDistance = (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position));
     }
     public override void Execute()
     {
-        //if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.4f /*|| PlayerSensSystem.instance.nearestLog.CheckIfFalling()*/
-        //    || (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position)) != lastDistance)
-        if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.5f || PlayerSensSystem.instance.nearestLog.CheckIfFalling() || actualContactDistance < constactDistance - 0.1f || actualContactDistance > constactDistance + 0.1f || lastMovableLog != PlayerSensSystem.instance.nearestLog)
+        if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.5f /*|| PlayerSensSystem.instance.nearestLog.CheckIfFalling()*/
+            || (int)GenericSensUtilities.instance.DistanceBetween2Vectors(transform.position, PlayerSensSystem.instance.nearestLog.FindContactPoint(PlayerController.instance.transform.position)) != lastDistance)
+        //if (Input.GetButtonUp("RB") || Input.GetKeyUp(KeyCode.E) || PlayerSensSystem.instance.CheckGroundDistance() > 0.5f || PlayerSensSystem.instance.nearestLog.CheckIfFalling() /*|| actualContactDistance < constactDistance - 0.1f || actualContactDistance > constactDistance + 0.1f*/ || lastMovableLog != PlayerSensSystem.instance.nearestLog)
         {
             PlayerController.instance.ChangeState(PlayerController.instance.movementState);
         }

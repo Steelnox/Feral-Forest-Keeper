@@ -33,8 +33,9 @@ public class PlayerManager : MonoBehaviour
     public float colorsPuzzlePilarInteractionDistance;
     public float skillPillarsInteractionDistance;
     public float sanctuaryInteractionDistance;
-
+    [SerializeField]
     private bool haveDashSkill;
+    [SerializeField]
     private bool havePowerSkill;
 
     public GameObject canvas;

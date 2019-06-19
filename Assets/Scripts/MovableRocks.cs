@@ -26,16 +26,6 @@ public class MovableRocks : MonoBehaviour
 
     void Update()
     {
-        //if (CheckGroundDistance() > bodyMeshrenderer.bounds.extents.y / 2 + 0.5f || rockBody.transform.position.y < lastNoPushingPos.y - 0.5f)
-        //{
-        //    //Debug.Log("Rock Distance To Ground = " + CheckGroundDistance());
-        //    //myRigidbody.isKinematic = false;
-        //    falling = true;
-        //}
-        //else
-        //{
-        //    falling = false;
-        //}
         CheckSideToPush();
 
         if (!beingPushed)

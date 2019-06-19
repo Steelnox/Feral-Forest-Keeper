@@ -18,6 +18,7 @@ TagManager:
   - SimonPuzzle
   - ChangeScene
   - StaticCameraZone
+  - Puddle
   layers:
   - Default
   - TransparentFX

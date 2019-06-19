@@ -5,6 +5,8 @@ using UnityEngine;
 public class ParticlesCompositeSystem : MonoBehaviour
 {
     public Particles_Behavior[] particles;
+
+    public bool picked;
     //void Start()
     //{
 
@@ -12,7 +14,11 @@ public class ParticlesCompositeSystem : MonoBehaviour
 
     void Update()
     {
-        if (!IsCompositePlaying()) transform.position = GameManager.instance.hidePos;
+        if (!IsCompositePlaying())
+        {
+            transform.position = GameManager.instance.hidePos;
+            picked = false;
+        }
     }
     public void PlayComposition(Vector3 position)
     {

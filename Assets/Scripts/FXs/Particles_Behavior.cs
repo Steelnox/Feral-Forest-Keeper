@@ -10,7 +10,7 @@ public class Particles_Behavior : MonoBehaviour
 
     void Start()
     {
-        active = false;
+        active = particles.isPlaying;
     }
 
     void Update()
