@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         provisionalGUIMenuOnScreenPos = provisionalGUIMenu.anchoredPosition;
         hidePos = Vector2.down * 1000;
         Cursor.lockState = CursorLockMode.Locked;
+        if (SceneManager.GetActiveScene().name == "Lvl1 Def") Cursor.visible = false;
         PlayerController.instance.transform.position = levelCheckPoint.transform.position;
         startCheckPointPosition = levelCheckPoint.transform.position;
         branchItem_InitLocation = branchItem.transform.position;
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Entering Pause");
             PlayerController.instance.noInput = true;
             if (provisionalGUIMenu.anchoredPosition != provisionalGUIMenuOnScreenPos) provisionalGUIMenu.anchoredPosition = provisionalGUIMenuOnScreenPos;
-            if (Input.GetButtonDown("Back") || Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetButtonDown("B") || Input.GetKeyDown(KeyCode.Q))
             {
                 Application.Quit();
             }
